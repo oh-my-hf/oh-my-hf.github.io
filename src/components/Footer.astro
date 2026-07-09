@@ -1,0 +1,67 @@
+---
+import { REPO_URL } from '../config';
+import {
+  alternateLocale,
+  localePath,
+  useTranslations,
+  type Locale,
+} from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const alt = alternateLocale(locale);
+const altHref = localePath(alt);
+const switchLabel = alt === 'zh-CN' ? t('nav.switchToZh') : t('nav.switchToEn');
+
+const links = [
+  { href: REPO_URL, label: t('footer.github') },
+  { href: `${REPO_URL}/releases`, label: t('footer.releases') },
+  { href: `${REPO_URL}/blob/main/LICENSE`, label: t('footer.license') },
+] as const;
+---
+
+<footer class="border-t border-line px-4 py-12 sm:px-6 sm:py-16">
+  <div class="mx-auto max-w-6xl">
+    <p class="max-w-3xl text-sm leading-relaxed text-fog">
+      {t('footer.disclaimer')}
+    </p>
+
+    <div
+      class="mt-8 flex flex-col gap-6 border-t border-line pt-8 sm:flex-row sm:items-center sm:justify-between"
+    >
+      <nav
+        class="flex flex-wrap items-center gap-x-5 gap-y-2"
+        aria-label={t('footer.nav')}
+      >
+        {
+          links.map((link) => (
+            <a
+              href={link.href}
+              class="font-mono text-xs text-fog transition-colors hover:text-iris"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {link.label}
+            </a>
+          ))
+        }
+        <a
+          href={altHref}
+          class="font-mono text-xs text-fog transition-colors hover:text-iris"
+          aria-label={t('footer.language')}
+        >
+          {switchLabel}
+        </a>
+      </nav>
+
+      <div class="flex flex-col gap-1 font-mono text-[11px] text-fog/80 sm:items-end">
+        <p>{t('footer.notAffiliated')}</p>
+        <p>{t('footer.noTrackers')}</p>
+      </div>
+    </div>
+  </div>
+</footer>
