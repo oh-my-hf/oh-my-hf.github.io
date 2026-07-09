@@ -1,0 +1,179 @@
+---
+import { REPO_URL } from '../config';
+import {
+  alternateLocale,
+  localePath,
+  useTranslations,
+  type Locale,
+} from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const alt = alternateLocale(locale);
+const altHref = localePath(alt);
+const switchLabel = alt === 'zh-CN' ? t('nav.switchToZh') : t('nav.switchToEn');
+
+const navItems = [
+  { href: '#features', label: t('nav.features') },
+  { href: '#download', label: t('nav.download') },
+  { href: '#faq', label: t('nav.faq') },
+] as const;
+---
+
+<header
+  class="fixed inset-x-0 top-0 z-50 border-b border-line/80 bg-ink/90 backdrop-blur-md"
+>
+  <div
+    class="mx-auto flex h-14 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6"
+  >
+    <a
+      href={localePath(locale)}
+      class="font-display text-lg font-semibold tracking-tight text-paper transition-colors hover:text-iris"
+    >
+      ohmyhf
+    </a>
+
+    <nav class="hidden items-center gap-8 md:flex" aria-label={t('nav.primary')}>
+      {
+        navItems.map((item) => (
+          <a
+            href={item.href}
+            class="text-sm text-fog transition-colors hover:text-paper"
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <div class="flex items-center gap-3">
+      <a
+        href={REPO_URL}
+        class="hidden text-fog transition-colors hover:text-paper sm:inline-flex"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={t('nav.github')}
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          class="h-5 w-5"
+          aria-hidden="true"
+        >
+          <path
+            d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.387.6.113.82-.26.82-.577 0-.285-.01-1.04-.016-2.04-3.338.726-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.09-.745.083-.73.083-.73 1.205.085 1.84 1.237 1.84 1.237 1.07 1.834 2.807 1.304 3.492.997.108-.775.418-1.305.76-1.605-2.665-.304-5.466-1.332-5.466-5.93 0-1.31.468-2.38 1.236-3.22-.124-.303-.536-1.523.117-3.176 0 0 1.008-.322 3.3 1.23a11.5 11.5 0 0 1 3.003-.404c1.02.005 2.047.138 3.003.404 2.29-1.552 3.297-1.23 3.297-1.23.655 1.653.243 2.873.12 3.176.77.84 1.235 1.91 1.235 3.22 0 4.61-2.807 5.624-5.48 5.92.43.37.823 1.102.823 2.222 0 1.606-.015 2.898-.015 3.293 0 .32.216.694.825.576C20.565 21.796 24 17.297 24 12 24 5.37 18.63 0 12 0z"
+          ></path>
+        </svg>
+      </a>
+
+      <a
+        href={altHref}
+        class="rounded-sm px-2 py-1 font-mono text-xs text-fog transition-colors hover:bg-panel hover:text-paper"
+        aria-label={t('nav.language')}
+        data-lang-switch
+      >
+        {switchLabel}
+      </a>
+
+      <button
+        type="button"
+        class="inline-flex items-center justify-center rounded-sm p-2 text-fog transition-colors hover:bg-panel hover:text-paper md:hidden"
+        aria-expanded="false"
+        aria-controls="mobile-nav"
+        data-menu-toggle
+        data-label-open={t('nav.openMenu')}
+        data-label-close={t('nav.closeMenu')}
+        aria-label={t('nav.openMenu')}
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          class="h-5 w-5"
+          aria-hidden="true"
+          data-menu-icon-open
+        >
+          <path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"></path>
+        </svg>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          class="hidden h-5 w-5"
+          aria-hidden="true"
+          data-menu-icon-close
+        >
+          <path stroke-linecap="round" d="M6 6l12 12M18 6L6 18"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div
+    id="mobile-nav"
+    class="hidden border-t border-line bg-ink md:hidden"
+    data-mobile-nav
+  >
+    <nav
+      class="mx-auto flex max-w-6xl flex-col gap-1 px-4 py-3 sm:px-6"
+      aria-label={t('nav.mobile')}
+    >
+      {
+        navItems.map((item) => (
+          <a
+            href={item.href}
+            class="rounded-sm px-2 py-2 text-sm text-fog transition-colors hover:bg-panel hover:text-paper"
+            data-mobile-nav-link
+          >
+            {item.label}
+          </a>
+        ))
+      }
+      <a
+        href={REPO_URL}
+        class="rounded-sm px-2 py-2 text-sm text-fog transition-colors hover:bg-panel hover:text-paper"
+        target="_blank"
+        rel="noopener noreferrer"
+        data-mobile-nav-link
+      >
+        {t('nav.github')}
+      </a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+  const nav = document.querySelector<HTMLElement>('[data-mobile-nav]');
+  const iconOpen = document.querySelector<SVGElement>('[data-menu-icon-open]');
+  const iconClose = document.querySelector<SVGElement>('[data-menu-icon-close]');
+
+  function setOpen(open: boolean) {
+    if (!toggle || !nav || !iconOpen || !iconClose) return;
+    const openLabel = toggle.dataset.labelOpen ?? 'Open menu';
+    const closeLabel = toggle.dataset.labelClose ?? 'Close menu';
+    nav.classList.toggle('hidden', !open);
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? closeLabel : openLabel);
+    iconOpen.classList.toggle('hidden', open);
+    iconClose.classList.toggle('hidden', !open);
+  }
+
+  toggle?.addEventListener('click', () => {
+    const open = toggle.getAttribute('aria-expanded') === 'true';
+    setOpen(!open);
+  });
+
+  document.querySelectorAll('[data-mobile-nav-link]').forEach((link) => {
+    link.addEventListener('click', () => setOpen(false));
+  });
+</script>

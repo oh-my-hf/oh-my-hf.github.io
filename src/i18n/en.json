@@ -1,0 +1,25 @@
+{
+  "meta": {
+    "title": "ohmyhf — Unofficial Hugging Face desktop client",
+    "description": "ohmyhf is an unofficial Hugging Face desktop client for browsing, downloading, and managing the Hub — fast, local, and private. Open source, Apache-2.0, for macOS, Windows, and Linux."
+  },
+  "nav": {
+    "features": "Features",
+    "download": "Download",
+    "faq": "FAQ",
+    "github": "GitHub",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "switchToZh": "中文",
+    "switchToEn": "English",
+    "language": "Language",
+    "primary": "Primary",
+    "mobile": "Mobile"
+  },
+  "hero": {
+    "region": "Hero"
+  },
+  "footer": {
+    "stub": "Footer — coming in a later phase."
+  }
+}

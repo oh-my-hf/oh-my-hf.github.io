@@ -1,0 +1,50 @@
+---
+import '../styles/global.css';
+import { htmlLang, localePath, useTranslations, type Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const lang = htmlLang(locale);
+const canonicalPath = localePath(locale);
+const site = Astro.site ?? new URL('https://ohmyhf.app');
+const canonicalURL = new URL(canonicalPath, site);
+const title = t('meta.title');
+const description = t('meta.description');
+const ogLocale = locale === 'zh-CN' ? 'zh_CN' : 'en_US';
+const ogLocaleAlt = locale === 'zh-CN' ? 'en_US' : 'zh_CN';
+---
+
+<!doctype html>
+<html lang={lang} class="bg-ink">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL.href} />
+    <link rel="alternate" hreflang="en" href={new URL('/', site).href} />
+    <link rel="alternate" hreflang="zh-CN" href={new URL('/zh/', site).href} />
+    <link rel="alternate" hreflang="x-default" href={new URL('/', site).href} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content={ogLocale} />
+    <meta property="og:locale:alternate" content={ogLocaleAlt} />
+    <meta property="og:url" content={canonicalURL.href} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL('/og.png', site).href} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL('/og.png', site).href} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+  </head>
+  <body class="min-h-screen bg-ink text-paper">
+    <slot />
+  </body>
+</html>

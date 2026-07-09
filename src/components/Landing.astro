@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from './Header.astro';
+import { useTranslations, type Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+---
+
+<BaseLayout locale={locale}>
+  <Header locale={locale} />
+  <main>
+    <!-- Hero placeholder — Phase 2 fills this section -->
+    <section
+      id="hero"
+      class="flex min-h-[70vh] items-center justify-center border-b border-line px-4 pt-14"
+      aria-label={t('hero.region')}
+    >
+      <!-- Phase 2: headline, CTAs, app window mockup -->
+    </section>
+  </main>
+  <footer class="border-t border-line px-4 py-8">
+    <div class="mx-auto max-w-6xl font-mono text-xs text-fog">
+      {t('footer.stub')}
+    </div>
+  </footer>
+</BaseLayout>

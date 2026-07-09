@@ -1,0 +1,25 @@
+{
+  "meta": {
+    "title": "ohmyhf — 非官方 Hugging Face 桌面客户端",
+    "description": "ohmyhf 是一款非官方 Hugging Face 桌面客户端，用于极速浏览、下载与管理 Hub —— 一切本地，尊重隐私。开源，Apache-2.0，支持 macOS、Windows 与 Linux。"
+  },
+  "nav": {
+    "features": "功能",
+    "download": "下载",
+    "faq": "常见问题",
+    "github": "GitHub",
+    "openMenu": "打开菜单",
+    "closeMenu": "关闭菜单",
+    "switchToZh": "中文",
+    "switchToEn": "English",
+    "language": "语言",
+    "primary": "主导航",
+    "mobile": "移动导航"
+  },
+  "hero": {
+    "region": "主视觉"
+  },
+  "footer": {
+    "stub": "页脚 — 后续阶段完善。"
+  }
+}
