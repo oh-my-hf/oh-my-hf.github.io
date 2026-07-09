@@ -1,0 +1,10 @@
+{
+  "plugins": {
+    "orchestrate": {
+      "enabled": true
+    },
+    "cursor-team-kit": {
+      "enabled": true
+    }
+  }
+}
