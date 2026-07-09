@@ -1,0 +1,100 @@
+---
+import { REPO_URL } from '../config';
+import { useTranslations, type Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+const contributingHref = `${REPO_URL}/blob/main/CONTRIBUTING.md`;
+
+const items = [
+  {
+    q: t('faq.items.official.q'),
+    a: t('faq.items.official.a'),
+    link: null as string | null,
+  },
+  {
+    q: t('faq.items.free.q'),
+    a: t('faq.items.free.a'),
+    link: null as string | null,
+  },
+  {
+    q: t('faq.items.safety.q'),
+    a: t('faq.items.safety.a'),
+    link: null as string | null,
+  },
+  {
+    q: t('faq.items.platforms.q'),
+    a: t('faq.items.platforms.a'),
+    link: null as string | null,
+  },
+  {
+    q: t('faq.items.cache.q'),
+    a: t('faq.items.cache.a'),
+    link: null as string | null,
+  },
+  {
+    q: t('faq.items.contribute.q'),
+    a: t('faq.items.contribute.a'),
+    link: contributingHref,
+  },
+] as const;
+---
+
+<section
+  id="faq"
+  class="border-b border-line px-4 py-24 sm:px-6 sm:py-32"
+  aria-label={t('faq.region')}
+>
+  <div class="mx-auto max-w-6xl">
+    <header class="max-w-xl">
+      <p class="font-mono text-xs tracking-wider text-fog uppercase">
+        {t('faq.eyebrow')}
+      </p>
+      <h2
+        class="mt-3 font-display text-2xl font-semibold tracking-tight text-paper sm:text-3xl"
+      >
+        {t('faq.title')}
+      </h2>
+    </header>
+
+    <div class="mt-12 divide-y divide-line border-y border-line">
+      {
+        items.map((item) => (
+          <details class="group py-1">
+            <summary class="cursor-pointer list-none py-4 pr-8 text-base font-medium text-paper transition-colors marker:content-none hover:text-iris [&::-webkit-details-marker]:hidden">
+              <span class="flex items-start justify-between gap-4">
+                <span>{item.q}</span>
+                <span
+                  class="mt-1 shrink-0 font-mono text-xs text-fog transition-transform group-open:rotate-45"
+                  aria-hidden="true"
+                >
+                  +
+                </span>
+              </span>
+            </summary>
+            <div class="pb-5 text-sm leading-relaxed text-fog">
+              <p>{item.a}</p>
+              {item.link ? (
+                <p class="mt-3">
+                  <a
+                    href={item.link}
+                    class="text-iris underline-offset-2 transition-colors hover:underline"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {t('faq.contributeLink')}
+                  </a>
+                </p>
+              ) : null}
+            </div>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>

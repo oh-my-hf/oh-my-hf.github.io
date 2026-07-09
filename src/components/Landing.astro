@@ -6,6 +6,8 @@ import PainPoint from './PainPoint.astro';
 import Features from './Features.astro';
 import ComingSoon from './ComingSoon.astro';
 import Trust from './Trust.astro';
+import Download from './Download.astro';
+import FAQ from './FAQ.astro';
 import type { Locale } from '../i18n';
 
 interface Props {
@@ -23,5 +25,7 @@ const { locale } = Astro.props;
     <Features locale={locale} />
     <ComingSoon locale={locale} />
     <Trust locale={locale} />
+    <Download locale={locale} />
+    <FAQ locale={locale} />
   </main>
 </BaseLayout>

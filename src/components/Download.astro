@@ -1,0 +1,195 @@
+---
+import { DOWNLOAD_URLS, REPO_URL, released } from '../config';
+import { useTranslations, type Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+const unsignedHref = `${REPO_URL}#unsigned-macos`;
+const watchHref = REPO_URL;
+
+const platforms = [
+  {
+    id: 'macos',
+    label: t('download.macos'),
+    format: t('download.macosFormat'),
+    href: DOWNLOAD_URLS.macOS,
+    platform: 'macos',
+  },
+  {
+    id: 'windows',
+    label: t('download.windows'),
+    format: t('download.windowsFormat'),
+    href: DOWNLOAD_URLS.windows,
+    platform: 'windows',
+  },
+  {
+    id: 'linux',
+    label: t('download.linux'),
+    format: `${t('download.linuxAppImage')} / ${t('download.linuxDeb')}`,
+    href: DOWNLOAD_URLS.linuxAppImage,
+    platform: 'linux',
+    secondaryHref: DOWNLOAD_URLS.linuxDeb,
+    secondaryLabel: t('download.linuxDeb'),
+  },
+] as const;
+---
+
+<section
+  id="download"
+  class="border-b border-line px-4 py-24 sm:px-6 sm:py-32"
+  aria-label={t('download.region')}
+>
+  <div class="mx-auto max-w-6xl">
+    <header class="max-w-xl">
+      <p class="font-mono text-xs tracking-wider text-fog uppercase">
+        {t('download.eyebrow')}
+      </p>
+      <h2
+        class="mt-3 font-display text-2xl font-semibold tracking-tight text-paper sm:text-3xl"
+      >
+        {t('download.title')}
+      </h2>
+      {
+        !released && (
+          <p class="mt-4 text-sm leading-relaxed text-fog">{t('download.notice')}</p>
+        )
+      }
+    </header>
+
+    {
+      !released && (
+        <div class="mt-8">
+          <a
+            href={watchHref}
+            class="inline-flex items-center justify-center rounded-sm bg-iris px-5 py-2.5 text-sm font-medium text-ink transition-colors hover:bg-iris/90"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {t('download.watchCta')}
+          </a>
+        </div>
+      )
+    }
+
+    <ul class="mt-12 grid gap-4 sm:grid-cols-3" data-download-matrix>
+      {
+        platforms.map((p) => (
+          <li
+            class="rounded-sm border border-line bg-panel p-5 transition-[border-color,opacity] data-[active=true]:border-iris data-[demoted=true]:opacity-55"
+            data-platform={p.platform}
+            data-download-platform
+          >
+            <p class="font-mono text-xs tracking-wider text-fog uppercase">
+              {p.label}
+            </p>
+            <p class="mt-1 font-mono text-[11px] text-fog/70">{p.format}</p>
+
+            {released ? (
+              <div class="mt-5 flex flex-col gap-2">
+                <a
+                  href={p.href}
+                  class="inline-flex items-center justify-center rounded-sm bg-iris px-4 py-2 text-sm font-medium text-ink transition-colors hover:bg-iris/90"
+                  data-download-primary
+                >
+                  {p.label}
+                </a>
+                {'secondaryHref' in p && p.secondaryHref ? (
+                  <a
+                    href={p.secondaryHref}
+                    class="inline-flex items-center justify-center rounded-sm border border-line px-4 py-2 font-mono text-xs text-fog transition-colors hover:border-iris/40 hover:text-iris"
+                  >
+                    {p.secondaryLabel}
+                  </a>
+                ) : null}
+              </div>
+            ) : (
+              <div class="mt-5 flex flex-col gap-2">
+                <span
+                  class="inline-flex cursor-not-allowed items-center justify-center rounded-sm border border-line bg-ink/60 px-4 py-2 text-sm font-medium text-fog"
+                  aria-disabled="true"
+                  role="link"
+                  data-download-primary
+                >
+                  {t('download.comingSoon')}
+                </span>
+                {'secondaryHref' in p && p.secondaryHref ? (
+                  <span
+                    class="inline-flex cursor-not-allowed items-center justify-center rounded-sm border border-line/60 px-4 py-2 font-mono text-xs text-fog/60"
+                    aria-disabled="true"
+                    role="link"
+                  >
+                    {p.secondaryLabel}
+                  </span>
+                ) : null}
+              </div>
+            )}
+          </li>
+        ))
+      }
+    </ul>
+
+    <p class="mt-8 text-sm text-fog">
+      {t('download.unsignedPrefix')}{' '}
+      <a
+        href={unsignedHref}
+        class="text-iris underline-offset-2 transition-colors hover:underline"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {t('download.unsignedNote')}
+      </a>
+      .
+    </p>
+  </div>
+</section>
+
+<script>
+  type Platform = 'macos' | 'windows' | 'linux' | 'unknown';
+
+  function detectPlatform(): Platform {
+    const nav = navigator as Navigator & {
+      userAgentData?: { platform?: string; getHighEntropyValues?: unknown };
+    };
+    const uaDataPlatform = nav.userAgentData?.platform?.toLowerCase() ?? '';
+    const ua = navigator.userAgent.toLowerCase();
+    const platform = (navigator.platform || '').toLowerCase();
+
+    if (
+      uaDataPlatform.includes('mac') ||
+      platform.includes('mac') ||
+      ua.includes('mac os') ||
+      ua.includes('macintosh')
+    ) {
+      return 'macos';
+    }
+    if (
+      uaDataPlatform.includes('win') ||
+      platform.includes('win') ||
+      ua.includes('windows')
+    ) {
+      return 'windows';
+    }
+    if (
+      uaDataPlatform.includes('linux') ||
+      platform.includes('linux') ||
+      (ua.includes('linux') && !ua.includes('android'))
+    ) {
+      return 'linux';
+    }
+    return 'unknown';
+  }
+
+  const detected = detectPlatform();
+  if (detected !== 'unknown') {
+    document.querySelectorAll<HTMLElement>('[data-download-platform]').forEach((el) => {
+      const match = el.dataset.platform === detected;
+      el.dataset.active = match ? 'true' : 'false';
+      el.dataset.demoted = match ? 'false' : 'true';
+    });
+  }
+</script>
