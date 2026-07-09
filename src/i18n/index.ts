@@ -68,7 +68,10 @@ export function htmlLang(locale: Locale): string {
   }
 }
 
-/** Public path prefix for a locale (`''` for English, `/zh` for Chinese). */
+/** Deploy base path without trailing slash (`''` when serving from the root). */
+const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+/** Public path prefix for a locale (`''` for English, `/zh` for Chinese), relative to the site root. */
 export function localePath(locale: Locale, path = ''): string {
   const normalized = path.startsWith('/') ? path : path ? `/${path}` : '';
   switch (locale) {
@@ -81,6 +84,11 @@ export function localePath(locale: Locale, path = ''): string {
       return _exhaustive;
     }
   }
+}
+
+/** Browser-facing link for a locale: `localePath` prefixed with the deploy base. */
+export function localeHref(locale: Locale, path = ''): string {
+  return `${BASE}${localePath(locale, path)}`;
 }
 
 /** Opposite locale for the language switcher. */

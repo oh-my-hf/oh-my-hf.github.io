@@ -2,7 +2,7 @@
 import { REPO_URL } from '../config';
 import {
   alternateLocale,
-  localePath,
+  localeHref,
   useTranslations,
   type Locale,
 } from '../i18n';
@@ -14,7 +14,7 @@ interface Props {
 const { locale } = Astro.props;
 const t = useTranslations(locale);
 const alt = alternateLocale(locale);
-const altHref = localePath(alt);
+const altHref = localeHref(alt);
 const switchLabel = alt === 'zh-CN' ? t('nav.switchToZh') : t('nav.switchToEn');
 
 const navItems = [
@@ -31,7 +31,7 @@ const navItems = [
     class="mx-auto flex h-14 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6"
   >
     <a
-      href={localePath(locale)}
+      href={localeHref(locale)}
       class="font-display text-lg font-semibold tracking-tight text-paper transition-colors hover:text-iris"
     >
       ohmyhf

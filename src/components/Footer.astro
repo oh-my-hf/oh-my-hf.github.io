@@ -2,7 +2,7 @@
 import { REPO_URL } from '../config';
 import {
   alternateLocale,
-  localePath,
+  localeHref,
   useTranslations,
   type Locale,
 } from '../i18n';
@@ -14,7 +14,7 @@ interface Props {
 const { locale } = Astro.props;
 const t = useTranslations(locale);
 const alt = alternateLocale(locale);
-const altHref = localePath(alt);
+const altHref = localeHref(alt);
 const switchLabel = alt === 'zh-CN' ? t('nav.switchToZh') : t('nav.switchToEn');
 
 const links = [
