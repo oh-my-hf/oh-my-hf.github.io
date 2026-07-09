@@ -55,7 +55,98 @@
       "description": "Scan your Hugging Face cache directory, inspect disk use per repo, and clean old revisions in one click. The web can't do this — ohmyhf can save you hundreds of gigabytes in ~/.cache/huggingface."
     }
   },
+  "comingSoon": {
+    "region": "Coming soon",
+    "eyebrow": "Roadmap",
+    "title": "On the way.",
+    "badge": "Coming soon",
+    "inbox": {
+      "title": "Watch inbox",
+      "description": "Subscribe to users, orgs, and repos for updates and Daily Papers — with system notifications when something new lands."
+    },
+    "compare": {
+      "title": "Model comparison",
+      "description": "Put 2–4 models side by side: parameters, license, and benchmarks in one glance so you can pick with confidence."
+    },
+    "toolchain": {
+      "title": "Local AI toolchain",
+      "description": "Push GGUF into Ollama or LM Studio, send models to ComfyUI, and run an in-app inference playground — without leaving the desktop."
+    }
+  },
+  "trust": {
+    "region": "Trust",
+    "eyebrow": "Principles",
+    "title": "Built to earn trust.",
+    "openSource": {
+      "title": "Open source",
+      "description": "Apache-2.0 licensed. Read the code, fork it, audit it — the full repository is public on GitHub."
+    },
+    "privacy": {
+      "title": "Privacy-first",
+      "description": "Everything stays local in SQLite. No telemetry. OAuth tokens are stored with OS-level encryption — never in plaintext."
+    },
+    "crossPlatform": {
+      "title": "Cross-platform",
+      "description": "Native builds for macOS, Windows, and Linux, with automatic updates so you stay current without hunting installers."
+    }
+  },
+  "download": {
+    "region": "Download",
+    "eyebrow": "Get the app",
+    "title": "Download ohmyhf",
+    "notice": "First release is on its way — watch the repo to get notified.",
+    "watchCta": "Watch on GitHub",
+    "comingSoon": "Coming soon",
+    "macos": "macOS",
+    "macosFormat": "dmg",
+    "windows": "Windows",
+    "windowsFormat": "nsis",
+    "linux": "Linux",
+    "linuxAppImage": "AppImage",
+    "linuxDeb": "deb",
+    "unsignedNote": "Opening unsigned macOS apps",
+    "unsignedPrefix": "macOS builds are unsigned for now — see how to open them in the"
+  },
+  "faq": {
+    "region": "FAQ",
+    "eyebrow": "FAQ",
+    "title": "Questions, answered.",
+    "items": {
+      "official": {
+        "q": "Is this an official Hugging Face app?",
+        "a": "No. ohmyhf is an unofficial open-source project. It is not affiliated with, associated with, or endorsed by Hugging Face, Inc. “Hugging Face” is a trademark of Hugging Face, Inc., used here for identification purposes only."
+      },
+      "free": {
+        "q": "Is ohmyhf free?",
+        "a": "Yes. The app is free and open source under the Apache-2.0 license. You can use it, study it, and contribute without paying a fee."
+      },
+      "safety": {
+        "q": "Are my data and tokens safe?",
+        "a": "All app data stays on your machine in a local SQLite database. Tokens are stored with OS-level encryption, never in plaintext. There is no telemetry, and the source is public so you can audit what runs."
+      },
+      "platforms": {
+        "q": "Which platforms are supported?",
+        "a": "ohmyhf targets macOS, Windows, and Linux. Builds ship as dmg, NSIS installer, and AppImage / deb, with automatic updates once releases are published."
+      },
+      "cache": {
+        "q": "Is the cache compatible with huggingface-cli and transformers?",
+        "a": "Yes. Downloads write to the standard Hugging Face cache layout. Models and datasets you fetch in ohmyhf work with huggingface-cli, transformers, and other tools that expect that layout."
+      },
+      "contribute": {
+        "q": "How can I contribute?",
+        "a": "We welcome issues, pull requests, and translations. Start with the contributing guide in the repository — it covers setup, coding standards, and how to propose changes."
+      }
+    },
+    "contributeLink": "CONTRIBUTING.md"
+  },
   "footer": {
-    "stub": "Footer — coming in a later phase."
+    "disclaimer": "This is an unofficial open-source project, not affiliated with, associated with, or endorsed by Hugging Face, Inc. “Hugging Face” is a trademark of Hugging Face, Inc., used here for identification purposes only.",
+    "nav": "Footer",
+    "github": "GitHub",
+    "releases": "Releases",
+    "license": "License",
+    "notAffiliated": "Not affiliated with Hugging Face, Inc.",
+    "noTrackers": "No trackers on this site",
+    "language": "Language"
   }
 }

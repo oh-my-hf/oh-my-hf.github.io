@@ -1,0 +1,71 @@
+---
+import { REPO_URL } from '../config';
+import { useTranslations, type Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+const columns = [
+  {
+    title: t('trust.openSource.title'),
+    description: t('trust.openSource.description'),
+    href: REPO_URL,
+  },
+  {
+    title: t('trust.privacy.title'),
+    description: t('trust.privacy.description'),
+    href: null as string | null,
+  },
+  {
+    title: t('trust.crossPlatform.title'),
+    description: t('trust.crossPlatform.description'),
+    href: null as string | null,
+  },
+] as const;
+---
+
+<section
+  class="border-b border-line px-4 py-24 sm:px-6 sm:py-32"
+  aria-label={t('trust.region')}
+>
+  <div class="mx-auto max-w-6xl">
+    <header class="max-w-xl">
+      <p class="font-mono text-xs tracking-wider text-fog uppercase">
+        {t('trust.eyebrow')}
+      </p>
+      <h2
+        class="mt-3 font-display text-2xl font-semibold tracking-tight text-paper sm:text-3xl"
+      >
+        {t('trust.title')}
+      </h2>
+    </header>
+
+    <ul class="mt-12 grid gap-10 sm:grid-cols-3 sm:gap-8">
+      {
+        columns.map((col) => (
+          <li>
+            <h3 class="font-display text-lg font-semibold tracking-tight text-paper">
+              {col.href ? (
+                <a
+                  href={col.href}
+                  class="transition-colors hover:text-iris"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {col.title}
+                </a>
+              ) : (
+                col.title
+              )}
+            </h3>
+            <p class="mt-3 text-sm leading-relaxed text-fog">{col.description}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

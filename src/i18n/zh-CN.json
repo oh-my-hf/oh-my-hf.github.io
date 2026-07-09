@@ -55,7 +55,98 @@
       "description": "扫描 Hugging Face 缓存目录，按仓库展示磁盘占用，一键清理旧 revision。网页做不到这件事 —— ohmyhf 能帮你从 ~/.cache/huggingface 里救出几百 GB。"
     }
   },
+  "comingSoon": {
+    "region": "即将推出",
+    "eyebrow": "路线图",
+    "title": "即将到来。",
+    "badge": "即将推出",
+    "inbox": {
+      "title": "关注收件箱",
+      "description": "订阅用户、组织与仓库的更新及 Daily Papers，有新动态时通过系统通知提醒你。"
+    },
+    "compare": {
+      "title": "模型对比",
+      "description": "将 2–4 个模型并排对比参数量、license 与 benchmark，一眼看清差异，放心选型。"
+    },
+    "toolchain": {
+      "title": "本地 AI 工具链",
+      "description": "一键把 GGUF 推进 Ollama / LM Studio，把模型送进 ComfyUI，并在应用内使用 inference playground —— 无需离开桌面。"
+    }
+  },
+  "trust": {
+    "region": "信任",
+    "eyebrow": "原则",
+    "title": "值得信赖的设计。",
+    "openSource": {
+      "title": "开源",
+      "description": "采用 Apache-2.0 许可。阅读代码、Fork、审计 —— 完整仓库公开在 GitHub。"
+    },
+    "privacy": {
+      "title": "隐私优先",
+      "description": "一切数据留在本地 SQLite。无遥测。OAuth token 经系统级加密存储，绝不明文。"
+    },
+    "crossPlatform": {
+      "title": "跨平台",
+      "description": "提供 macOS、Windows 与 Linux 原生构建，并支持自动更新，无需四处寻找安装包。"
+    }
+  },
+  "download": {
+    "region": "下载",
+    "eyebrow": "获取应用",
+    "title": "下载 ohmyhf",
+    "notice": "首个正式版即将发布 —— 关注仓库即可收到通知。",
+    "watchCta": "在 GitHub 上关注",
+    "comingSoon": "即将推出",
+    "macos": "macOS",
+    "macosFormat": "dmg",
+    "windows": "Windows",
+    "windowsFormat": "nsis",
+    "linux": "Linux",
+    "linuxAppImage": "AppImage",
+    "linuxDeb": "deb",
+    "unsignedNote": "打开未签名的 macOS 应用",
+    "unsignedPrefix": "目前 macOS 构建尚未签名 —— 打开方法见"
+  },
+  "faq": {
+    "region": "常见问题",
+    "eyebrow": "常见问题",
+    "title": "常见问题解答。",
+    "items": {
+      "official": {
+        "q": "这是官方应用吗？",
+        "a": "不是。ohmyhf 是非官方开源项目，与 Hugging Face, Inc. 无任何隶属、关联或背书关系。“Hugging Face” 是 Hugging Face, Inc. 的商标，本站仅指称性使用。"
+      },
+      "free": {
+        "q": "免费吗？",
+        "a": "是的。应用免费开源，采用 Apache-2.0 许可。你可以免费使用、研究代码并参与贡献。"
+      },
+      "safety": {
+        "q": "我的数据和 token 安全吗？",
+        "a": "所有应用数据保存在本机 SQLite 中。Token 经系统级加密存储，绝不明文。无遥测，源码公开，可审计实际运行内容。"
+      },
+      "platforms": {
+        "q": "支持哪些平台？",
+        "a": "ohmyhf 面向 macOS、Windows 与 Linux。发布形态包括 dmg、NSIS 安装包以及 AppImage / deb；正式版发布后将支持自动更新。"
+      },
+      "cache": {
+        "q": "与 huggingface-cli / transformers 的缓存兼容吗？",
+        "a": "兼容。下载写入 Hugging Face 标准缓存布局。在 ohmyhf 中获取的模型与数据集，可直接被 huggingface-cli、transformers 及其他遵循该布局的工具使用。"
+      },
+      "contribute": {
+        "q": "如何参与贡献？",
+        "a": "欢迎提交 Issue、Pull Request 与翻译。请先阅读仓库中的贡献指南 —— 其中说明了环境搭建、编码规范与变更提交流程。"
+      }
+    },
+    "contributeLink": "CONTRIBUTING.md"
+  },
   "footer": {
-    "stub": "页脚 — 后续阶段完善。"
+    "disclaimer": "本项目为非官方开源项目，与 Hugging Face, Inc. 无任何隶属、关联或背书关系；“Hugging Face” 是 Hugging Face, Inc. 的商标，本站仅指称性使用。",
+    "nav": "页脚",
+    "github": "GitHub",
+    "releases": "Releases",
+    "license": "许可证",
+    "notAffiliated": "与 Hugging Face, Inc. 无关联",
+    "noTrackers": "本站不含任何跟踪器",
+    "language": "语言"
   }
 }
