@@ -63,24 +63,26 @@ jobs:
       - name: Smoke-test deployed site
         run: |
           url="${{ steps.deployment.outputs.page_url }}"
-          origin="$(printf '%s' "$url" | grep -Eo 'https?://[^/]+')"
 
-          html=""
+          # page_url can lag behind a custom-domain change, so follow
+          # redirects and resolve assets against the final URL.
+          final=""
           for attempt in 1 2 3 4 5; do
-            html="$(curl -fsSL "$url")" && break
+            final="$(curl -fsSL -o page.html -w '%{url_effective}' "$url")" && break
             echo "Fetch attempt $attempt failed; retrying..."
             sleep 10
           done
-          [ -n "$html" ] || { echo "::error::Deployed page at $url is unreachable"; exit 1; }
+          [ -n "$final" ] || { echo "::error::Deployed page at $url is unreachable"; exit 1; }
+          origin="$(printf '%s' "$final" | grep -Eo 'https?://[^/]+')"
 
-          css="$(printf '%s' "$html" | grep -Eo '<link rel="stylesheet" href="[^"]+"' | head -1 | sed 's/.*href="//;s/"$//')"
-          [ -n "$css" ] || { echo "::error::No stylesheet link found in deployed HTML"; exit 1; }
+          css="$(grep -Eo '<link rel="stylesheet" href="[^"]+"' page.html | head -1 | sed 's/.*href="//;s/"$//')"
+          [ -n "$css" ] || { echo "::error::No stylesheet link found in HTML from $final"; exit 1; }
 
           case "$css" in
             http*) target="$css" ;;
             /*)    target="$origin$css" ;;
-            *)     target="$url$css" ;;
+            *)     target="$final$css" ;;
           esac
-          curl -fsS -o /dev/null "$target" \
+          curl -fsSL -o /dev/null "$target" \
             || { echo "::error::Stylesheet $target is not loadable — asset paths do not match where Pages serves the site"; exit 1; }
-          echo "OK: $target loads."
+          echo "OK: $target loads (page: $final)."
