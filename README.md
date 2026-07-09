@@ -29,6 +29,7 @@ Open [http://localhost:4321/](http://localhost:4321/) (English) and [http://loca
 | `pnpm preview`  | Preview the production build |
 | `pnpm lint`     | Run ESLint               |
 | `pnpm format`   | Format with Prettier     |
+| `pnpm generate:og` | Regenerate `public/og.png` (not part of build) |
 
 ## Build
 
@@ -59,7 +60,7 @@ Output is written to `dist/` and can be served by any static host.
 
 ## Placeholder media
 
-Product screenshots and recordings are not available yet. UI is implemented as HTML/CSS mockups that can be swapped for real assets later. See [`docs/media-replacement.md`](docs/media-replacement.md) for the inventory and replacement steps (added in a later phase).
+Product screenshots and recordings are not available yet. UI is implemented as HTML/CSS mockups that can be swapped for real assets later. See [`docs/media-replacement.md`](docs/media-replacement.md) for the inventory and replacement steps.
 
 ## License
 

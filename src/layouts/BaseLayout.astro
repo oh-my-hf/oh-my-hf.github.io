@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import { REPO_URL } from '../config';
 import { htmlLang, localePath, useTranslations, type Locale } from '../i18n';
 
 interface Props {
@@ -16,6 +17,23 @@ const title = t('meta.title');
 const description = t('meta.description');
 const ogLocale = locale === 'zh-CN' ? 'zh_CN' : 'en_US';
 const ogLocaleAlt = locale === 'zh-CN' ? 'en_US' : 'zh_CN';
+const ogImage = new URL('/og.png', site).href;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'ohmyhf',
+  applicationCategory: 'DeveloperApplication',
+  operatingSystem: 'macOS, Windows, Linux',
+  license: 'https://www.apache.org/licenses/LICENSE-2.0',
+  url: site.href,
+  downloadUrl: `${REPO_URL}/releases`,
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'USD',
+  },
+};
 ---
 
 <!doctype html>
@@ -31,18 +49,22 @@ const ogLocaleAlt = locale === 'zh-CN' ? 'en_US' : 'zh_CN';
     <link rel="alternate" hreflang="zh-CN" href={new URL('/zh/', site).href} />
     <link rel="alternate" hreflang="x-default" href={new URL('/', site).href} />
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="ohmyhf" />
     <meta property="og:locale" content={ogLocale} />
     <meta property="og:locale:alternate" content={ogLocaleAlt} />
     <meta property="og:url" content={canonicalURL.href} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={new URL('/og.png', site).href} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={new URL('/og.png', site).href} />
+    <meta name="twitter:image" content={ogImage} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </head>
   <body class="min-h-screen bg-ink text-paper">
     <slot />
