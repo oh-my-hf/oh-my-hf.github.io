@@ -1,0 +1,77 @@
+---
+import { REPO_URL, released } from '../config';
+import { useTranslations, type Locale } from '../i18n';
+import HeroAppWindow from './mockups/HeroAppWindow.astro';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+const primaryHref = released ? '#download' : REPO_URL;
+const primaryExternal = !released;
+---
+
+<section
+  id="hero"
+  class="border-b border-line px-4 pb-16 pt-24 sm:px-6 sm:pb-24 sm:pt-28"
+  aria-label={t('hero.region')}
+>
+  <div class="mx-auto max-w-6xl">
+    <div class="mx-auto max-w-3xl text-center">
+      <h1
+        class="font-display text-3xl font-semibold tracking-tight text-paper sm:text-4xl md:text-5xl md:leading-[1.15]"
+      >
+        {t('hero.title')}
+      </h1>
+      <p class="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-fog sm:text-lg">
+        {t('hero.subtitle')}
+      </p>
+
+      <div
+        class="mt-8 flex flex-wrap items-center justify-center gap-3"
+      >
+        <a
+          href={primaryHref}
+          class="inline-flex items-center justify-center rounded-sm bg-iris px-5 py-2.5 text-sm font-medium text-ink transition-colors hover:bg-iris/90"
+          {...(primaryExternal
+            ? { target: '_blank', rel: 'noopener noreferrer' }
+            : {})}
+        >
+          {t('hero.ctaPrimary')}
+        </a>
+        <a
+          href={REPO_URL}
+          class="inline-flex items-center justify-center gap-2 rounded-sm border border-line bg-panel px-5 py-2.5 text-sm font-medium text-paper transition-colors hover:border-iris/40 hover:text-iris"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            class="h-4 w-4"
+            aria-hidden="true"
+          >
+            <path
+              d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.387.6.113.82-.26.82-.577 0-.285-.01-1.04-.016-2.04-3.338.726-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.09-.745.083-.73.083-.73 1.205.085 1.84 1.237 1.84 1.237 1.07 1.834 2.807 1.304 3.492.997.108-.775.418-1.305.76-1.605-2.665-.304-5.466-1.332-5.466-5.93 0-1.31.468-2.38 1.236-3.22-.124-.303-.536-1.523.117-3.176 0 0 1.008-.322 3.3 1.23a11.5 11.5 0 0 1 3.003-.404c1.02.005 2.047.138 3.003.404 2.29-1.552 3.297-1.23 3.297-1.23.655 1.653.243 2.873.12 3.176.77.84 1.235 1.91 1.235 3.22 0 4.61-2.807 5.624-5.48 5.92.43.37.823 1.102.823 2.222 0 1.606-.015 2.898-.015 3.293 0 .32.216.694.825.576C20.565 21.796 24 17.297 24 12 24 5.37 18.63 0 12 0z"
+            ></path>
+          </svg>
+          {t('hero.ctaSecondary')}
+        </a>
+      </div>
+
+      <p
+        class="mt-5 font-mono text-[11px] leading-relaxed tracking-wide text-fog/80 sm:text-xs"
+      >
+        {t('hero.badge')}
+      </p>
+    </div>
+
+    <div class="mt-12 sm:mt-16">
+      <HeroAppWindow />
+    </div>
+  </div>
+</section>

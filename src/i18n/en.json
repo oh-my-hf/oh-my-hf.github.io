@@ -17,7 +17,43 @@
     "mobile": "Mobile"
   },
   "hero": {
-    "region": "Hero"
+    "region": "Hero",
+    "title": "The Hugging Face desktop client that should have existed.",
+    "subtitle": "An unofficial, open-source app for browsing, downloading and managing the Hub — fast, local, private.",
+    "ctaPrimary": "Watch on GitHub",
+    "ctaSecondary": "Star on GitHub",
+    "badge": "Apache-2.0 · macOS / Windows / Linux · No telemetry · English / 中文"
+  },
+  "pain": {
+    "line": "Twenty tabs. Endless reloads. A 300 GB cache folder you're afraid to open.",
+    "fix": "ohmyhf fixes this."
+  },
+  "features": {
+    "region": "Features",
+    "browse": {
+      "eyebrow": "Browse",
+      "number": "01",
+      "title": "Triple-pane browsing. Zero reloads.",
+      "description": "Sidebar, list, and live preview stay put while you switch Models, Datasets, Spaces, and Papers. Long lists stay smooth with virtualization; the right pane renders model cards, file trees, and metadata instantly — no new tabs, no full-page reloads."
+    },
+    "command": {
+      "eyebrow": "Command",
+      "number": "02",
+      "title": "Cmd+K. Keyboard-first Hub search.",
+      "description": "One palette for search, filters, and sort. Narrow by task, library, license, or parameter count; rank by trending, likes, or downloads. Stay in flow without hunting through menus."
+    },
+    "downloads": {
+      "eyebrow": "Downloads",
+      "number": "03",
+      "title": "A download manager the browser can't match.",
+      "description": "Queue jobs, run them in parallel, pause and resume, cap speed, and verify sha256 on finish — with system notifications when you're done. Files land in the standard Hugging Face cache layout, so transformers and the CLI just work."
+    },
+    "cache": {
+      "eyebrow": "Cache",
+      "number": "04",
+      "title": "See your local cache. Reclaim the gigabytes.",
+      "description": "Scan your Hugging Face cache directory, inspect disk use per repo, and clean old revisions in one click. The web can't do this — ohmyhf can save you hundreds of gigabytes in ~/.cache/huggingface."
+    }
   },
   "footer": {
     "stub": "Footer — coming in a later phase."
