@@ -49,26 +49,32 @@
     "browse": {
       "eyebrow": "浏览",
       "title": "三栏极速浏览，零刷新切换。",
-      "description": "侧边栏、列表与实时预览固定布局，在 Models、Datasets、Spaces、Papers 之间切换无需新标签、无需整页重载。长列表虚拟滚动保持流畅；右栏即时渲染 model card、文件树与元数据。",
-      "shotAlt": "三栏浏览界面：模型列表与 README 卡片"
+      "description": "侧边栏、列表与实时预览固定布局，在 Models、Datasets、Spaces、Papers 之间切换。点选仓库后，右栏即时渲染 model card —— 无需新标签、无需整页重载。",
+      "shotAlt": "三栏浏览界面：模型列表与实时 README 卡片"
     },
-    "command": {
-      "eyebrow": "搜索与筛选",
-      "title": "Cmd+K。键盘优先的 Hub 搜索。",
-      "description": "一个面板搞定搜索、筛选与排序。按 task、library、license 或参数量收窄结果；按 trending、likes 或 downloads 排序。不用翻菜单，保持心流。",
-      "shotAlt": "任务、库与许可证筛选面板"
+    "filter": {
+      "eyebrow": "筛选",
+      "title": "把 Hub 筛到只剩你要的那一列。",
+      "description": "在模型列表旁打开筛选：task、参数量、library、license。一键清空或点 Done，继续在同一套三栏里浏览。想搜全局时，随时 ⌘K。",
+      "shotAlt": "含 task、参数量、library、license 的筛选面板"
     },
-    "downloads": {
+    "files": {
       "eyebrow": "文件",
-      "title": "浏览器给不了的下载管理器。",
-      "description": "队列、并行、暂停/续传、限速、完成后 sha256 校验，以及系统级完成通知。写入 Hugging Face 标准缓存布局，与 transformers / CLI 完全互通。",
-      "shotAlt": "模型仓库的文件树与预览面板"
+      "title": "打开文件树，就地预览配置。",
+      "description": "在任意仓库切到 Files：浏览目录、选中权重或 config.json，在侧栏预览内容 —— 不用再开浏览器标签。",
+      "shotAlt": "Files 标签：仓库文件树与 config.json 预览"
     },
-    "cache": {
+    "home": {
       "eyebrow": "主页",
-      "title": "关注 Hub，不必堆满浏览器标签。",
-      "description": "关注对象的主页动态、侧边 Trending，以及收藏、下载与缓存组成的 Library —— 全部收进一个桌面窗口，把浏览器留给别的事。",
+      "title": "主页动态，侧边 Trending。",
+      "description": "关注用户与组织，中间刷动态，右侧盯着 Trending 的 models / datasets / spaces。收藏、下载、缓存等 Library 入口都在同一侧栏。",
       "shotAlt": "主页动态与 Trending 侧栏"
+    },
+    "spaces": {
+      "eyebrow": "Spaces",
+      "title": "Spaces 是画廊，不是一堆标签页。",
+      "description": "以卡片网格浏览运行中的 Spaces，看状态与 likes，选中后再打开详情。节奏与 Models 一样：三栏，点选即预览。",
+      "shotAlt": "Spaces 画廊：彩色 Space 卡片网格"
     }
   },
   "comingSoon": {
@@ -99,11 +105,11 @@
     },
     "privacy": {
       "title": "隐私优先",
-      "description": "一切数据留在本地 SQLite。无遥测。OAuth token 经系统级加密存储，绝不明文。"
+      "description": "一切数据留在本地 SQLite。无遥测。OAuth token 经系统级加密存储，绝不明文。下载写入 Hugging Face 标准缓存，并可用可视化工具回收磁盘空间。"
     },
     "crossPlatform": {
       "title": "跨平台",
-      "description": "提供 macOS、Windows 与 Linux 原生构建，并通过应用内更新保持最新，无需四处寻找安装包。"
+      "description": "提供 macOS、Windows 与 Linux 原生构建。支持可续传、并行下载、sha256 校验与系统通知，并通过 GitHub Releases 应用内更新。"
     }
   },
   "download": {

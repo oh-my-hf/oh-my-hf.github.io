@@ -61,23 +61,48 @@
 
 :root {
   color-scheme: light;
+  --wash: radial-gradient(
+    ellipse 80% 55% at 50% -10%,
+    rgb(243 244 246 / 0.95) 0%,
+    transparent 60%
+  );
+  --shot-shadow: 0 4px 16px rgb(16 24 40 / 0.06);
+  --header-bg: rgb(255 255 255 / 0.86);
 }
 
+/*
+  Dark: Hub desktop chrome — cool near-black blues, hairline borders,
+  light CTA pill. Not a flat invert of the light theme.
+*/
 :root[data-theme='dark'] {
   color-scheme: dark;
-  --color-ink: #030712;
-  --color-panel: #0b0f19;
-  --color-panel-2: #101623;
-  --color-line: #1e2939;
-  --color-fog: #9aa7ba;
-  --color-paper: #f3f4f6;
-  --color-body: #d1d5dc;
-  --color-faint: #99a1af;
-  --color-iris: #818cf8;
-  --color-focus: #3b82f6;
-  --color-cta: #f3f4f6;
-  --color-cta-ink: #030712;
+  --color-ink: #070b14;
+  --color-panel: #0d1320;
+  --color-panel-2: #151c2e;
+  --color-line: #243049;
+  --color-fog: #9aa8bd;
+  --color-paper: #f1f5f9;
+  --color-body: #c5cedb;
+  --color-faint: #8b97ab;
+  --color-iris: #a5b4fc;
+  --color-focus: #60a5fa;
+  --color-cta: #eef2ff;
+  --color-cta-ink: #0a1020;
   --color-brand: #ffd21e;
+  --wash: radial-gradient(
+      ellipse 110% 75% at 50% -25%,
+      rgb(99 102 241 / 0.28) 0%,
+      rgb(56 48 120 / 0.12) 32%,
+      transparent 62%
+    ),
+    radial-gradient(
+      ellipse 60% 40% at 85% 10%,
+      rgb(255 210 30 / 0.06) 0%,
+      transparent 50%
+    );
+  --shot-shadow:
+    0 0 0 1px rgb(165 180 252 / 0.12), 0 16px 48px rgb(0 0 0 / 0.55);
+  --header-bg: rgb(7 11 20 / 0.78);
 }
 
 @layer base {
@@ -123,12 +148,43 @@
     @apply inline-flex items-center justify-center rounded-full bg-cta px-5 py-2.5 text-sm font-medium text-cta-ink transition-colors hover:bg-cta/90;
   }
 
+  :root[data-theme='dark'] .btn-primary {
+    box-shadow: 0 0 0 1px rgb(165 180 252 / 0.2), 0 8px 24px rgb(0 0 0 / 0.35);
+  }
+
   .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 rounded-full border border-line bg-panel px-5 py-2.5 text-sm font-medium text-paper transition-colors hover:border-paper/20 hover:bg-panel-2;
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-line bg-panel px-5 py-2.5 text-sm font-medium text-paper transition-colors hover:border-iris/35 hover:bg-panel-2;
+  }
+
+  :root[data-theme='dark'] .btn-secondary {
+    background-color: rgb(21 28 46 / 0.85);
   }
 
   .shot-frame {
-    @apply overflow-hidden rounded-lg border border-line bg-panel shadow-[0_4px_16px_rgb(16_24_40_/_0.06)];
+    @apply overflow-hidden rounded-lg border border-line bg-panel;
+    box-shadow: var(--shot-shadow);
+  }
+
+  .site-wash {
+    background-image: var(--wash);
+  }
+
+  .site-header {
+    background-color: var(--header-bg);
+  }
+
+  /* Theme-paired screenshots */
+  .shot-light {
+    display: block;
+  }
+  .shot-dark {
+    display: none;
+  }
+  :root[data-theme='dark'] .shot-light {
+    display: none;
+  }
+  :root[data-theme='dark'] .shot-dark {
+    display: block;
   }
 }
 

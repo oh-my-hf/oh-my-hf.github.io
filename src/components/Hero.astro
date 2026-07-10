@@ -21,7 +21,7 @@ const primaryExternal = !released;
   aria-label={t('hero.region')}
 >
   <div
-    class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgb(243_244_246)_0%,_transparent_55%)]"
+    class="pointer-events-none absolute inset-0 site-wash"
     aria-hidden="true"
   >
   </div>
@@ -118,7 +118,15 @@ const primaryExternal = !released;
           alt={t('hero.shotAlt')}
           width="2400"
           height="1500"
-          class="h-auto w-full"
+          class="shot-light h-auto w-full"
+          fetchpriority="high"
+        />
+        <img
+          src={`${base}/browse-dark.png`}
+          alt={t('hero.shotAlt')}
+          width="2400"
+          height="1500"
+          class="shot-dark h-auto w-full"
           fetchpriority="high"
         />
       </figure>

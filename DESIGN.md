@@ -23,7 +23,7 @@ OKLCH-aligned cool neutrals matching the app light theme. Strategy: **restrained
 | select | `#4f46e5` | selection / active underline |
 | brand | `#FFD21E` | icon only |
 
-Dark theme tokens invert the ramp for optional toggle; light is the designed default.
+Dark theme tokens follow the app’s cool near-black blues (`#070b14` page, `#0d1320` panels, indigo wash), with a light CTA pill and theme-paired screenshots — not a flat invert of the light theme.
 
 ### Typography
 

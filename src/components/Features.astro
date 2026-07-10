@@ -9,6 +9,7 @@ const { locale } = Astro.props;
 const t = useTranslations(locale);
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
+/** Each row’s copy is written for the screenshot it shows — keep them paired. */
 const features = [
   {
     key: 'browse',
@@ -16,35 +17,49 @@ const features = [
     description: t('features.browse.description'),
     label: t('features.browse.eyebrow'),
     src: 'browse.png',
+    srcDark: 'browse-dark.png',
     alt: t('features.browse.shotAlt'),
     reverse: false,
   },
   {
-    key: 'home',
-    title: t('features.command.title'),
-    description: t('features.command.description'),
-    label: t('features.command.eyebrow'),
+    key: 'filter',
+    title: t('features.filter.title'),
+    description: t('features.filter.description'),
+    label: t('features.filter.eyebrow'),
     src: 'filter-panel.png',
-    alt: t('features.command.shotAlt'),
+    srcDark: null as string | null,
+    alt: t('features.filter.shotAlt'),
+    reverse: true,
+  },
+  {
+    key: 'files',
+    title: t('features.files.title'),
+    description: t('features.files.description'),
+    label: t('features.files.eyebrow'),
+    src: 'file-preview.png',
+    srcDark: null as string | null,
+    alt: t('features.files.shotAlt'),
+    reverse: false,
+  },
+  {
+    key: 'home',
+    title: t('features.home.title'),
+    description: t('features.home.description'),
+    label: t('features.home.eyebrow'),
+    src: 'home-feed.png',
+    srcDark: null as string | null,
+    alt: t('features.home.shotAlt'),
     reverse: true,
   },
   {
     key: 'spaces',
-    title: t('features.downloads.title'),
-    description: t('features.downloads.description'),
-    label: t('features.downloads.eyebrow'),
-    src: 'file-preview.png',
-    alt: t('features.downloads.shotAlt'),
+    title: t('features.spaces.title'),
+    description: t('features.spaces.description'),
+    label: t('features.spaces.eyebrow'),
+    src: 'spaces-gallery.png',
+    srcDark: null as string | null,
+    alt: t('features.spaces.shotAlt'),
     reverse: false,
-  },
-  {
-    key: 'cache',
-    title: t('features.cache.title'),
-    description: t('features.cache.description'),
-    label: t('features.cache.eyebrow'),
-    src: 'home-feed.png',
-    alt: t('features.cache.shotAlt'),
-    reverse: true,
   },
 ] as const;
 ---
@@ -84,8 +99,18 @@ const features = [
                 width="1600"
                 height="1000"
                 loading="lazy"
-                class="h-auto w-full"
+                class:list={[f.srcDark ? 'shot-light' : null, 'h-auto w-full']}
               />
+              {f.srcDark ? (
+                <img
+                  src={`${base}/${f.srcDark}`}
+                  alt={f.alt}
+                  width="1600"
+                  height="1000"
+                  loading="lazy"
+                  class="shot-dark h-auto w-full"
+                />
+              ) : null}
             </figure>
           </div>
         </article>
