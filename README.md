@@ -60,7 +60,15 @@ Output is written to `dist/` and can be served by any static host.
 
 ## Placeholder media
 
-Product screenshots and recordings are not available yet. UI is implemented as HTML/CSS mockups that can be swapped for real assets later. See [`docs/media-replacement.md`](docs/media-replacement.md) for the inventory and replacement steps (5 mockups + `og.png`).
+Product screenshots live in `public/` (e.g. `browse.png`, `home-feed.png`). The landing page uses them directly. Regenerate social assets with:
+
+```bash
+pnpm generate:favicon   # white-backed tab icon from public/icon-source.png
+pnpm generate:og        # light OG image → public/og.png
+pnpm fetch:release      # latest installers from oh-my-hf/ohmyhf Releases
+```
+
+`pnpm build` runs `fetch:release` automatically via `prebuild`.
 
 ## QA results (2026-07-09)
 

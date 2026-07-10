@@ -5,17 +5,27 @@ import { htmlLang, localePath, useTranslations, type Locale } from '../i18n';
 
 interface Props {
   locale: Locale;
+  title?: string;
+  description?: string;
+  noIndex?: boolean;
+  skipJsonLd?: boolean;
 }
 
-const { locale } = Astro.props;
+const {
+  locale,
+  title: titleOverride,
+  description: descriptionOverride,
+  noIndex = false,
+  skipJsonLd = false,
+} = Astro.props;
 const t = useTranslations(locale);
 const lang = htmlLang(locale);
 const canonicalPath = localePath(locale);
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const site = Astro.site ?? new URL('https://ohmyhf.com');
 const canonicalURL = new URL(canonicalPath, site);
-const title = t('meta.title');
-const description = t('meta.description');
+const title = titleOverride ?? t('meta.title');
+const description = descriptionOverride ?? t('meta.description');
 const ogLocale = locale === 'zh-CN' ? 'zh_CN' : 'en_US';
 const ogLocaleAlt = locale === 'zh-CN' ? 'en_US' : 'zh_CN';
 const ogImage = new URL('/og.png', site).href;
@@ -38,11 +48,19 @@ const jsonLd = {
 ---
 
 <!doctype html>
-<html lang={lang} class="bg-ink">
+<html lang={lang} class="bg-ink" data-theme="light">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#0a0d13" />
+    <meta name="theme-color" content="#ffffff" />
+    {
+      noIndex ? (
+        <meta name="robots" content="noindex, follow" />
+      ) : null
+    }
+    <script is:inline>
+      document.documentElement.classList.add('js');
+    </script>
     <script is:inline>
       (() => {
         let theme;
@@ -52,23 +70,35 @@ const jsonLd = {
           /* storage unavailable */
         }
         if (theme !== 'light' && theme !== 'dark') {
-          theme = window.matchMedia('(prefers-color-scheme: light)').matches
-            ? 'light'
-            : 'dark';
+          theme = 'light';
         }
         document.documentElement.dataset.theme = theme;
         document
           .querySelector('meta[name="theme-color"]')
-          ?.setAttribute('content', theme === 'light' ? '#f3f5f9' : '#0a0d13');
+          ?.setAttribute('content', theme === 'light' ? '#ffffff' : '#030712');
       })();
     </script>
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonicalURL.href} />
-    <link rel="alternate" hreflang="en" href={new URL('/', site).href} />
-    <link rel="alternate" hreflang="zh-CN" href={new URL('/zh/', site).href} />
-    <link rel="alternate" hreflang="x-default" href={new URL('/', site).href} />
+    {
+      noIndex ? null : (
+        <>
+          <link rel="canonical" href={canonicalURL.href} />
+          <link rel="alternate" hreflang="en" href={new URL('/', site).href} />
+          <link
+            rel="alternate"
+            hreflang="zh-CN"
+            href={new URL('/zh/', site).href}
+          />
+          <link
+            rel="alternate"
+            hreflang="x-default"
+            href={new URL('/', site).href}
+          />
+        </>
+      )
+    }
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="ohmyhf" />
     <meta property="og:locale" content={ogLocale} />
@@ -85,9 +115,13 @@ const jsonLd = {
     <meta name="twitter:image" content={ogImage} />
     <link rel="icon" type="image/png" href={`${base}/favicon.png`} />
     <link rel="apple-touch-icon" href={`${base}/favicon.png`} />
-    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    {
+      skipJsonLd ? null : (
+        <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+      )
+    }
   </head>
-  <body class="min-h-screen bg-ink text-paper">
+  <body class="min-h-screen bg-ink text-body">
     <slot />
   </body>
 </html>

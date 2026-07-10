@@ -3,6 +3,16 @@
     "title": "ohmyhf — Unofficial Hugging Face desktop client",
     "description": "ohmyhf is an unofficial Hugging Face desktop client for browsing, downloading, and managing the Hub — fast, local, and private. Open source, Apache-2.0, for macOS, Windows, and Linux."
   },
+  "notFound": {
+    "metaTitle": "404 — Page not found · ohmyhf",
+    "metaDescription": "This page does not exist. Head back to ohmyhf — the unofficial Hugging Face desktop client.",
+    "code": "404",
+    "title": "This page isn’t on the Hub.",
+    "body": "The URL may be mistyped, or the page moved. The desktop client is still where you left it.",
+    "home": "Back to home",
+    "download": "Download",
+    "github": "GitHub"
+  },
   "nav": {
     "features": "Features",
     "download": "Download",
@@ -21,11 +31,14 @@
   },
   "hero": {
     "region": "Hero",
+    "unofficial": "Unofficial",
     "title": "The Hugging Face desktop client that should have existed.",
     "subtitle": "An unofficial, open-source app for browsing, downloading and managing the Hub — fast, local, private.",
-    "ctaPrimary": "Watch on GitHub",
+    "ctaPrimary": "Download",
     "ctaSecondary": "Star on GitHub",
-    "badge": "Apache-2.0 · macOS / Windows / Linux · No telemetry · English / 中文"
+    "badge": "Apache-2.0 · macOS / Windows / Linux · No telemetry · English / 中文",
+    "badgeReleased": "v{version} · Apache-2.0 · macOS / Windows / Linux · No telemetry",
+    "shotAlt": "Oh My HuggingFace browse view: model list and live model card in a three-pane light window"
   },
   "pain": {
     "line": "Twenty tabs. Endless reloads. A 300 GB cache folder you're afraid to open.",
@@ -35,41 +48,41 @@
     "region": "Features",
     "browse": {
       "eyebrow": "Browse",
-      "number": "01",
       "title": "Triple-pane browsing. Zero reloads.",
-      "description": "Sidebar, list, and live preview stay put while you switch Models, Datasets, Spaces, and Papers. Long lists stay smooth with virtualization; the right pane renders model cards, file trees, and metadata instantly — no new tabs, no full-page reloads."
+      "description": "Sidebar, list, and live preview stay put while you switch Models, Datasets, Spaces, and Papers. Long lists stay smooth with virtualization; the right pane renders model cards, file trees, and metadata instantly — no new tabs, no full-page reloads.",
+      "shotAlt": "Three-pane browse UI showing a model list and README card"
     },
     "command": {
-      "eyebrow": "Command",
-      "number": "02",
+      "eyebrow": "Search & filter",
       "title": "Cmd+K. Keyboard-first Hub search.",
-      "description": "One palette for search, filters, and sort. Narrow by task, library, license, or parameter count; rank by trending, likes, or downloads. Stay in flow without hunting through menus."
+      "description": "One palette for search, filters, and sort. Narrow by task, library, license, or parameter count; rank by trending, likes, or downloads. Stay in flow without hunting through menus.",
+      "shotAlt": "Filter panel with task, library, and license filters"
     },
     "downloads": {
-      "eyebrow": "Downloads",
-      "number": "03",
+      "eyebrow": "Files",
       "title": "A download manager the browser can't match.",
-      "description": "Queue jobs, run them in parallel, pause and resume, cap speed, and verify sha256 on finish — with system notifications when you're done. Files land in the standard Hugging Face cache layout, so transformers and the CLI just work."
+      "description": "Queue jobs, run them in parallel, pause and resume, cap speed, and verify sha256 on finish — with system notifications when you're done. Files land in the standard Hugging Face cache layout, so transformers and the CLI just work.",
+      "shotAlt": "File tree and preview pane for a model repository"
     },
     "cache": {
-      "eyebrow": "Cache",
-      "number": "04",
-      "title": "See your local cache. Reclaim the gigabytes.",
-      "description": "Scan your Hugging Face cache directory, inspect disk use per repo, and clean old revisions in one click. The web can't do this — ohmyhf can save you hundreds of gigabytes in ~/.cache/huggingface."
+      "eyebrow": "Home",
+      "title": "Follow the Hub without the browser tabs.",
+      "description": "A home feed for people and orgs you follow, trending repos on the side, and a library for favorites, downloads, and cache — all in one desktop window that stays out of your browser.",
+      "shotAlt": "Home feed with trending models sidebar"
     }
   },
   "comingSoon": {
     "region": "Coming soon",
     "eyebrow": "Roadmap",
     "title": "On the way.",
-    "badge": "Coming soon",
+    "badge": "In progress",
     "inbox": {
-      "title": "Watch inbox",
-      "description": "Subscribe to users, orgs, and repos for updates and Daily Papers — with system notifications when something new lands."
+      "title": "Deeper inbox",
+      "description": "Richer follow notifications for users, orgs, repos, and Daily Papers — tuned so the signal stays useful."
     },
     "compare": {
-      "title": "Model comparison",
-      "description": "Put 2–4 models side by side: parameters, license, and benchmarks in one glance so you can pick with confidence."
+      "title": "Richer compare",
+      "description": "Side-by-side model compare with more metadata and benchmarks, so picking a checkpoint stays a glance."
     },
     "toolchain": {
       "title": "Local AI toolchain",
@@ -90,25 +103,27 @@
     },
     "crossPlatform": {
       "title": "Cross-platform",
-      "description": "Native builds for macOS, Windows, and Linux, with automatic updates so you stay current without hunting installers."
+      "description": "Native builds for macOS, Windows, and Linux, with in-app updates so you stay current without hunting installers."
     }
   },
   "download": {
     "region": "Download",
     "eyebrow": "Get the app",
     "title": "Download ohmyhf",
+    "versionLine": "Latest release: v{version}. Installers are pulled from GitHub Releases.",
     "notice": "First release is on its way — watch the repo to get notified.",
     "watchCta": "Watch on GitHub",
+    "get": "Get",
     "comingSoon": "Coming soon",
     "macos": "macOS",
-    "macosFormat": "dmg",
+    "macosFormat": "dmg (Apple Silicon)",
     "windows": "Windows",
     "windowsFormat": "nsis",
     "linux": "Linux",
     "linuxAppImage": "AppImage",
     "linuxDeb": "deb",
-    "unsignedNote": "Opening unsigned macOS apps",
-    "unsignedPrefix": "macOS builds are unsigned for now — see how to open them in the"
+    "unsignedNote": "signing notes",
+    "unsignedPrefix": "macOS builds are unsigned for now — see the"
   },
   "faq": {
     "region": "FAQ",
@@ -129,7 +144,7 @@
       },
       "platforms": {
         "q": "Which platforms are supported?",
-        "a": "ohmyhf targets macOS, Windows, and Linux. Builds ship as dmg, NSIS installer, and AppImage / deb, with automatic updates once releases are published."
+        "a": "ohmyhf targets macOS, Windows, and Linux. Builds ship as dmg, NSIS installer, and AppImage / deb, with in-app updates from GitHub Releases."
       },
       "cache": {
         "q": "Is the cache compatible with huggingface-cli and transformers?",

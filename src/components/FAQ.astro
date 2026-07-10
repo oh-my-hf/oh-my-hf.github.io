@@ -47,12 +47,12 @@ const items = [
 
 <section
   id="faq"
-  class="border-b border-line px-4 py-24 sm:px-6 sm:py-32"
+  class="border-b border-line px-4 py-20 sm:px-6 sm:py-28"
   aria-label={t('faq.region')}
 >
   <div class="mx-auto max-w-6xl">
     <header class="max-w-xl">
-      <p class="font-mono text-xs tracking-wider text-fog uppercase">
+      <p class="font-mono text-xs font-medium tracking-wide text-faint uppercase">
         {t('faq.eyebrow')}
       </p>
       <h2
@@ -70,20 +70,20 @@ const items = [
               <span class="flex items-start justify-between gap-4">
                 <span>{item.q}</span>
                 <span
-                  class="mt-1 shrink-0 font-mono text-xs text-fog transition-transform group-open:rotate-45"
+                  class="mt-1 shrink-0 font-mono text-xs text-faint transition-transform group-open:rotate-45"
                   aria-hidden="true"
                 >
                   +
                 </span>
               </span>
             </summary>
-            <div class="pb-5 text-sm leading-relaxed text-fog">
+            <div class="pb-5 text-sm leading-relaxed text-body">
               <p>{item.a}</p>
               {item.link ? (
                 <p class="mt-3">
                   <a
                     href={item.link}
-                    class="text-iris underline underline-offset-2 transition-colors hover:text-paper"
+                    class="text-paper underline underline-offset-2 transition-colors hover:text-iris"
                     target="_blank"
                     rel="noopener noreferrer"
                   >

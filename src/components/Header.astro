@@ -1,5 +1,5 @@
 ---
-import { REPO_URL } from '../config';
+import { REPO_URL, released } from '../config';
 import {
   alternateLocale,
   localeHref,
@@ -33,14 +33,14 @@ const navItems = [
   >
     <a
       href={localeHref(locale)}
-      class="flex items-center gap-2 font-display text-lg font-semibold tracking-tight text-paper transition-colors hover:text-iris"
+      class="flex items-center gap-2.5 font-display text-lg font-semibold tracking-tight text-paper transition-colors hover:text-iris"
     >
       <img
         src={`${base}/favicon.png`}
         alt=""
         width="28"
         height="28"
-        class="h-7 w-7"
+        class="h-7 w-7 rounded-full"
       />
       ohmyhf
     </a>
@@ -58,7 +58,7 @@ const navItems = [
       }
     </nav>
 
-    <div class="flex items-center gap-3">
+    <div class="flex items-center gap-2 sm:gap-3">
       <a
         href={REPO_URL}
         class="hidden text-fog transition-colors hover:text-paper sm:inline-flex"
@@ -81,11 +81,11 @@ const navItems = [
 
       <button
         type="button"
-        class="inline-flex min-h-11 min-w-11 items-center justify-center rounded-sm p-2 text-fog transition-colors hover:bg-panel hover:text-paper"
+        class="inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg p-2 text-fog transition-colors hover:bg-panel-2 hover:text-paper"
         data-theme-toggle
         data-label-light={t('nav.themeToLight')}
         data-label-dark={t('nav.themeToDark')}
-        aria-label={t('nav.themeToLight')}
+        aria-label={t('nav.themeToDark')}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -93,22 +93,7 @@ const navItems = [
           fill="none"
           stroke="currentColor"
           stroke-width="1.5"
-          class="block h-5 w-5 [html[data-theme='light']_&]:hidden"
-          aria-hidden="true"
-        >
-          <circle cx="12" cy="12" r="4"></circle>
-          <path
-            stroke-linecap="round"
-            d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M18.7 5.3l-1.8 1.8M7.1 16.9l-1.8 1.8"
-          ></path>
-        </svg>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="1.5"
-          class="hidden h-5 w-5 [html[data-theme='light']_&]:block"
+          class="block h-5 w-5 [html[data-theme='dark']_&]:hidden"
           aria-hidden="true"
         >
           <path
@@ -117,19 +102,45 @@ const navItems = [
             d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11z"
           ></path>
         </svg>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          class="hidden h-5 w-5 [html[data-theme='dark']_&]:block"
+          aria-hidden="true"
+        >
+          <circle cx="12" cy="12" r="4"></circle>
+          <path
+            stroke-linecap="round"
+            d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M18.7 5.3l-1.8 1.8M7.1 16.9l-1.8 1.8"
+          ></path>
+        </svg>
       </button>
 
       <a
         href={altHref}
-        class="inline-flex min-h-11 min-w-11 items-center justify-center rounded-sm px-2 py-1 font-mono text-xs text-fog transition-colors hover:bg-panel hover:text-paper"
+        class="inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg px-2 py-1 font-mono text-xs text-fog transition-colors hover:bg-panel-2 hover:text-paper"
         data-lang-switch
       >
         {switchLabel}
       </a>
 
+      {
+        released ? (
+          <a
+            href="#download"
+            class="btn-primary hidden sm:inline-flex"
+          >
+            {t('nav.download')}
+          </a>
+        ) : null
+      }
+
       <button
         type="button"
-        class="inline-flex min-h-11 min-w-11 items-center justify-center rounded-sm p-2 text-fog transition-colors hover:bg-panel hover:text-paper md:hidden"
+        class="inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg p-2 text-fog transition-colors hover:bg-panel-2 hover:text-paper md:hidden"
         aria-expanded="false"
         aria-controls="mobile-nav"
         data-menu-toggle
@@ -178,7 +189,7 @@ const navItems = [
         navItems.map((item) => (
           <a
             href={item.href}
-            class="rounded-sm px-2 py-2 text-sm text-fog transition-colors hover:bg-panel hover:text-paper"
+            class="rounded-lg px-2 py-2 text-sm text-fog transition-colors hover:bg-panel-2 hover:text-paper"
             data-mobile-nav-link
           >
             {item.label}
@@ -187,7 +198,7 @@ const navItems = [
       }
       <a
         href={REPO_URL}
-        class="rounded-sm px-2 py-2 text-sm text-fog transition-colors hover:bg-panel hover:text-paper"
+        class="rounded-lg px-2 py-2 text-sm text-fog transition-colors hover:bg-panel-2 hover:text-paper"
         target="_blank"
         rel="noopener noreferrer"
         data-mobile-nav-link
@@ -229,10 +240,10 @@ const navItems = [
 
   function syncThemeToggle() {
     if (!themeToggle) return;
-    const light = document.documentElement.dataset.theme === 'light';
+    const dark = document.documentElement.dataset.theme === 'dark';
     themeToggle.setAttribute(
       'aria-label',
-      (light ? themeToggle.dataset.labelDark : themeToggle.dataset.labelLight) ??
+      (dark ? themeToggle.dataset.labelLight : themeToggle.dataset.labelDark) ??
         'Toggle theme',
     );
   }
@@ -241,7 +252,7 @@ const navItems = [
 
   themeToggle?.addEventListener('click', () => {
     const next =
-      document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+      document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
     document.documentElement.dataset.theme = next;
     try {
       localStorage.setItem('theme', next);
@@ -250,7 +261,7 @@ const navItems = [
     }
     document
       .querySelector('meta[name="theme-color"]')
-      ?.setAttribute('content', next === 'light' ? '#f3f5f9' : '#0a0d13');
+      ?.setAttribute('content', next === 'light' ? '#ffffff' : '#030712');
     syncThemeToggle();
   });
 </script>

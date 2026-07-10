@@ -10,17 +10,23 @@ const t = useTranslations(locale);
 ---
 
 <section
-  class="border-b border-line px-4 py-24 sm:px-6 sm:py-32"
+  data-pain
+  class="border-b border-line bg-panel px-4 py-20 sm:px-6 sm:py-28"
   aria-labelledby="pain-heading"
 >
   <div class="mx-auto max-w-3xl text-center">
     <p
       id="pain-heading"
-      class="font-display text-2xl font-medium leading-snug tracking-tight text-paper sm:text-3xl md:text-4xl md:leading-snug"
+      data-pain-line
+      class="font-display text-2xl font-medium leading-snug tracking-tight text-paper will-change-transform sm:text-3xl md:text-4xl md:leading-snug"
+      style="letter-spacing: -0.025em"
     >
       {t('pain.line')}
     </p>
-    <p class="mt-8 font-mono text-sm tracking-wide text-iris sm:text-base">
+    <p
+      data-pain-fix
+      class="mt-8 font-mono text-sm font-medium tracking-wide text-iris will-change-transform sm:text-base"
+    >
       {t('pain.fix')}
     </p>
   </div>

@@ -1,5 +1,5 @@
 ---
-import { DOWNLOAD_URLS, REPO_URL, released } from '../config';
+import { DOWNLOAD_URLS, REPO_URL, released, version } from '../config';
 import { useTranslations, type Locale } from '../i18n';
 
 interface Props {
@@ -9,7 +9,7 @@ interface Props {
 const { locale } = Astro.props;
 const t = useTranslations(locale);
 
-const unsignedHref = `${REPO_URL}#unsigned-macos`;
+const unsignedHref = `${REPO_URL}/blob/main/docs/signing.md`;
 const watchHref = REPO_URL;
 
 const platforms = [
@@ -41,12 +41,13 @@ const platforms = [
 
 <section
   id="download"
-  class="border-b border-line px-4 py-24 sm:px-6 sm:py-32"
+  data-download
+  class="border-b border-line px-4 py-20 sm:px-6 sm:py-28"
   aria-label={t('download.region')}
 >
   <div class="mx-auto max-w-6xl">
-    <header class="max-w-xl">
-      <p class="font-mono text-xs tracking-wider text-fog uppercase">
+    <header data-section-head class="max-w-xl will-change-transform">
+      <p class="font-mono text-xs font-medium tracking-wide text-faint uppercase">
         {t('download.eyebrow')}
       </p>
       <h2
@@ -55,8 +56,12 @@ const platforms = [
         {t('download.title')}
       </h2>
       {
-        !released && (
-          <p class="mt-4 text-sm leading-relaxed text-fog">{t('download.notice')}</p>
+        released ? (
+          <p class="mt-4 text-sm leading-relaxed text-body">
+            {t('download.versionLine').replace('{version}', version)}
+          </p>
+        ) : (
+          <p class="mt-4 text-sm leading-relaxed text-body">{t('download.notice')}</p>
         )
       }
     </header>
@@ -66,7 +71,7 @@ const platforms = [
         <div class="mt-8">
           <a
             href={watchHref}
-            class="inline-flex items-center justify-center rounded-sm bg-iris px-5 py-2.5 text-sm font-medium text-ink transition-colors hover:bg-iris/90"
+            class="btn-primary"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -80,28 +85,24 @@ const platforms = [
       {
         platforms.map((p) => (
           <li
-            class="rounded-sm border border-line bg-panel p-5 transition-[border-color,background-color] data-[active=true]:border-iris data-[demoted=true]:border-line/80 data-[demoted=true]:bg-ink/40"
+            class="rounded-lg border border-line bg-panel p-5 will-change-transform transition-[border-color,background-color] data-[active=true]:border-iris/40 data-[active=true]:bg-ink data-[demoted=true]:opacity-80"
             data-platform={p.platform}
             data-download-platform
           >
-            <p class="font-mono text-xs tracking-wider text-fog uppercase">
+            <p class="font-mono text-xs font-medium tracking-wide text-faint uppercase">
               {p.label}
             </p>
-            <p class="mt-1 font-mono text-[11px] text-fog">{p.format}</p>
+            <p class="mt-1 font-mono text-[11px] text-faint">{p.format}</p>
 
             {released ? (
               <div class="mt-5 flex flex-col gap-2">
-                <a
-                  href={p.href}
-                  class="inline-flex items-center justify-center rounded-sm bg-iris px-4 py-2 text-sm font-medium text-ink transition-colors hover:bg-iris/90"
-                  data-download-primary
-                >
-                  {p.label}
+                <a href={p.href} class="btn-primary" data-download-primary>
+                  {t('download.get')} {p.label}
                 </a>
                 {'secondaryHref' in p && p.secondaryHref ? (
                   <a
                     href={p.secondaryHref}
-                    class="inline-flex items-center justify-center rounded-sm border border-line px-4 py-2 font-mono text-xs text-fog transition-colors hover:border-iris/40 hover:text-iris"
+                    class="inline-flex items-center justify-center rounded-full border border-line px-4 py-2 font-mono text-xs text-fog transition-colors hover:border-paper/20 hover:text-paper"
                   >
                     {p.secondaryLabel}
                   </a>
@@ -110,7 +111,7 @@ const platforms = [
             ) : (
               <div class="mt-5 flex flex-col gap-2">
                 <span
-                  class="inline-flex cursor-not-allowed items-center justify-center rounded-sm border border-line bg-ink/60 px-4 py-2 text-sm font-medium text-fog"
+                  class="inline-flex cursor-not-allowed items-center justify-center rounded-full border border-line bg-panel-2 px-4 py-2 text-sm font-medium text-faint"
                   aria-disabled="true"
                   role="link"
                   data-download-primary
@@ -119,7 +120,7 @@ const platforms = [
                 </span>
                 {'secondaryHref' in p && p.secondaryHref ? (
                   <span
-                    class="inline-flex cursor-not-allowed items-center justify-center rounded-sm border border-line/60 px-4 py-2 font-mono text-xs text-fog"
+                    class="inline-flex cursor-not-allowed items-center justify-center rounded-full border border-line/60 px-4 py-2 font-mono text-xs text-faint"
                     aria-disabled="true"
                     role="link"
                   >
@@ -133,11 +134,11 @@ const platforms = [
       }
     </ul>
 
-    <p class="mt-8 text-sm text-fog">
+    <p class="mt-8 text-sm text-body">
       {t('download.unsignedPrefix')}{' '}
       <a
         href={unsignedHref}
-        class="text-iris underline underline-offset-2 transition-colors hover:text-paper"
+        class="text-paper underline underline-offset-2 transition-colors hover:text-iris"
         target="_blank"
         rel="noopener noreferrer"
       >

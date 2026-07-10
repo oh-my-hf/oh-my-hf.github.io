@@ -25,7 +25,7 @@ const links = [
 ] as const;
 ---
 
-<footer class="border-t border-line px-4 py-12 sm:px-6 sm:py-16">
+<footer class="border-t border-line bg-panel px-4 py-12 sm:px-6 sm:py-16">
   <div class="mx-auto max-w-6xl">
     <div class="mb-6 flex items-center gap-3">
       <img
@@ -34,14 +34,14 @@ const links = [
         width="36"
         height="36"
         loading="lazy"
-        class="h-9 w-9"
+        class="h-9 w-9 rounded-full"
       />
       <span class="font-display text-lg font-semibold tracking-tight text-paper">
         ohmyhf
       </span>
     </div>
 
-    <p class="max-w-3xl text-sm leading-relaxed text-fog">
+    <p class="max-w-3xl text-sm leading-relaxed text-body">
       {t('footer.disclaimer')}
     </p>
 
@@ -72,7 +72,7 @@ const links = [
         </a>
       </nav>
 
-      <div class="flex flex-col gap-1 font-mono text-[11px] text-fog/80 sm:items-end">
+      <div class="flex flex-col gap-1 font-mono text-[11px] text-faint sm:items-end">
         <p>{t('footer.notAffiliated')}</p>
         <p>{t('footer.noTrackers')}</p>
       </div>

@@ -29,12 +29,12 @@ const columns = [
 ---
 
 <section
-  class="border-b border-line px-4 py-24 sm:px-6 sm:py-32"
+  class="border-b border-line bg-panel px-4 py-20 sm:px-6 sm:py-28"
   aria-label={t('trust.region')}
 >
   <div class="mx-auto max-w-6xl">
     <header class="max-w-xl">
-      <p class="font-mono text-xs tracking-wider text-fog uppercase">
+      <p class="font-mono text-xs font-medium tracking-wide text-faint uppercase">
         {t('trust.eyebrow')}
       </p>
       <h2
@@ -62,7 +62,7 @@ const columns = [
                 col.title
               )}
             </h3>
-            <p class="mt-3 text-sm leading-relaxed text-fog">{col.description}</p>
+            <p class="mt-3 text-sm leading-relaxed text-body">{col.description}</p>
           </li>
         ))
       }

@@ -1,7 +1,6 @@
 ---
-import { REPO_URL, released } from '../config';
+import { REPO_URL, released, version } from '../config';
 import { useTranslations, type Locale } from '../i18n';
-import HeroAppWindow from './mockups/HeroAppWindow.astro';
 
 interface Props {
   locale: Locale;
@@ -9,6 +8,7 @@ interface Props {
 
 const { locale } = Astro.props;
 const t = useTranslations(locale);
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 const primaryHref = released ? '#download' : REPO_URL;
 const primaryExternal = !released;
@@ -16,26 +16,58 @@ const primaryExternal = !released;
 
 <section
   id="hero"
-  class="border-b border-line px-4 pb-16 pt-24 sm:px-6 sm:pb-24 sm:pt-28"
+  data-hero
+  class="relative overflow-hidden border-b border-line px-4 pb-16 pt-24 sm:px-6 sm:pb-24 sm:pt-28"
   aria-label={t('hero.region')}
 >
-  <div class="mx-auto max-w-6xl">
+  <div
+    class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgb(243_244_246)_0%,_transparent_55%)]"
+    aria-hidden="true"
+  >
+  </div>
+
+  <div class="relative mx-auto max-w-6xl">
     <div class="mx-auto max-w-3xl text-center">
+      <div
+        data-hero-brand
+        class="mb-6 flex items-center justify-center gap-3 will-change-transform"
+      >
+        <img
+          src={`${base}/favicon.png`}
+          alt=""
+          width="48"
+          height="48"
+          class="h-12 w-12 rounded-full"
+        />
+        <span class="font-display text-xl font-semibold tracking-tight text-paper"
+          >ohmyhf</span
+        >
+        <span
+          class="rounded-full border border-line bg-panel px-2.5 py-0.5 font-mono text-[11px] font-medium tracking-wide text-faint uppercase"
+        >
+          {t('hero.unofficial')}
+        </span>
+      </div>
+
       <h1
-        class="font-display text-3xl font-semibold tracking-tight text-paper text-balance sm:text-4xl md:text-5xl md:leading-[1.15]"
+        data-hero-title
+        class="font-display text-3xl font-semibold tracking-tight text-paper will-change-transform sm:text-4xl md:text-5xl md:leading-[1.12]"
+        style="letter-spacing: -0.03em"
       >
         {t('hero.title')}
       </h1>
-      <p class="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-fog sm:text-lg">
+      <p
+        data-hero-sub
+        class="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-body will-change-transform sm:text-lg"
+      >
         {t('hero.subtitle')}
       </p>
 
-      <div
-        class="mt-8 flex flex-wrap items-center justify-center gap-3"
-      >
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
         <a
+          data-hero-cta
           href={primaryHref}
-          class="inline-flex items-center justify-center rounded-sm bg-iris px-5 py-2.5 text-sm font-medium text-ink transition-colors hover:bg-iris/90"
+          class="btn-primary will-change-transform"
           {...(primaryExternal
             ? { target: '_blank', rel: 'noopener noreferrer' }
             : {})}
@@ -43,8 +75,9 @@ const primaryExternal = !released;
           {t('hero.ctaPrimary')}
         </a>
         <a
+          data-hero-cta
           href={REPO_URL}
-          class="inline-flex items-center justify-center gap-2 rounded-sm border border-line bg-panel px-5 py-2.5 text-sm font-medium text-paper transition-colors hover:border-iris/40 hover:text-iris"
+          class="btn-secondary will-change-transform"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -64,14 +97,31 @@ const primaryExternal = !released;
       </div>
 
       <p
-        class="mt-5 font-mono text-[11px] leading-relaxed tracking-wide text-fog sm:text-xs"
+        data-hero-meta
+        class="mt-5 font-mono text-[11px] leading-relaxed tracking-wide text-faint will-change-transform sm:text-xs"
       >
-        {t('hero.badge')}
+        {
+          released
+            ? t('hero.badgeReleased').replace('{version}', version)
+            : t('hero.badge')
+        }
       </p>
     </div>
 
     <div class="mt-12 sm:mt-16">
-      <HeroAppWindow />
+      <figure
+        data-hero-shot
+        class="shot-frame mx-auto max-w-5xl will-change-transform"
+      >
+        <img
+          src={`${base}/browse.png`}
+          alt={t('hero.shotAlt')}
+          width="2400"
+          height="1500"
+          class="h-auto w-full"
+          fetchpriority="high"
+        />
+      </figure>
     </div>
   </div>
 </section>

@@ -1,0 +1,80 @@
+---
+/**
+ * Static 404 for GitHub Pages / Cloudflare Pages.
+ * Built as English; if the missing URL was under `/zh/`, an inline script
+ * swaps copy and home links to 简体中文.
+ */
+import NotFound from '../components/NotFound.astro';
+import en from '../i18n/en.json';
+import zhCN from '../i18n/zh-CN.json';
+import { localeHref } from '../i18n';
+
+const payload = {
+  en: {
+    metaTitle: en.notFound.metaTitle,
+    metaDescription: en.notFound.metaDescription,
+    code: en.notFound.code,
+    title: en.notFound.title,
+    body: en.notFound.body,
+    homeLabel: en.notFound.home,
+    downloadLabel: en.notFound.download,
+    footer: en.footer.notAffiliated,
+    switchLabel: en.nav.switchToZh,
+    homeHref: localeHref('en'),
+    altHref: localeHref('zh-CN'),
+  },
+  zh: {
+    metaTitle: zhCN.notFound.metaTitle,
+    metaDescription: zhCN.notFound.metaDescription,
+    code: zhCN.notFound.code,
+    title: zhCN.notFound.title,
+    body: zhCN.notFound.body,
+    homeLabel: zhCN.notFound.home,
+    downloadLabel: zhCN.notFound.download,
+    footer: zhCN.footer.notAffiliated,
+    switchLabel: zhCN.nav.switchToEn,
+    homeHref: localeHref('zh-CN'),
+    altHref: localeHref('en'),
+  },
+};
+---
+
+<NotFound locale="en" />
+
+<script is:inline define:vars={{ payload }}>
+  (() => {
+    if (!/(?:^|\/)zh(?:\/|$)/.test(location.pathname)) return;
+    const c = payload.zh;
+    document.documentElement.lang = 'zh-CN';
+    document.title = c.metaTitle;
+    const desc = document.querySelector('meta[name="description"]');
+    if (desc) desc.setAttribute('content', c.metaDescription);
+
+    const text = (sel, value) => {
+      const el = document.querySelector(sel);
+      if (el) el.textContent = value;
+    };
+    text('[data-nf-code]', c.code);
+    text('[data-nf-title]', c.title);
+    text('[data-nf-body]', c.body);
+    text('[data-nf-footer]', c.footer);
+    text('[data-nf-lang]', c.switchLabel);
+
+    const homeLink = document.querySelector('[data-nf-home-link]');
+    if (homeLink) homeLink.setAttribute('href', c.homeHref);
+
+    const lang = document.querySelector('[data-nf-lang]');
+    if (lang) lang.setAttribute('href', c.altHref);
+
+    const ctaHome = document.querySelector('[data-nf-cta-home]');
+    if (ctaHome) {
+      ctaHome.textContent = c.homeLabel;
+      ctaHome.setAttribute('href', c.homeHref);
+    }
+    const ctaDownload = document.querySelector('[data-nf-cta-download]');
+    if (ctaDownload) {
+      ctaDownload.textContent = c.downloadLabel;
+      ctaDownload.setAttribute('href', c.homeHref + '#download');
+    }
+  })();
+</script>

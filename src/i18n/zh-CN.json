@@ -3,6 +3,16 @@
     "title": "ohmyhf — 非官方 Hugging Face 桌面客户端",
     "description": "ohmyhf 是一款非官方 Hugging Face 桌面客户端，用于极速浏览、下载与管理 Hub —— 一切本地，尊重隐私。开源，Apache-2.0，支持 macOS、Windows 与 Linux。"
   },
+  "notFound": {
+    "metaTitle": "404 — 页面不存在 · ohmyhf",
+    "metaDescription": "该页面不存在。返回 ohmyhf — 非官方 Hugging Face 桌面客户端。",
+    "code": "404",
+    "title": "Hub 上没有这一页。",
+    "body": "链接可能写错了，或页面已搬家。桌面客户端还在原处等你。",
+    "home": "返回首页",
+    "download": "下载",
+    "github": "GitHub"
+  },
   "nav": {
     "features": "功能",
     "download": "下载",
@@ -21,11 +31,14 @@
   },
   "hero": {
     "region": "主视觉",
+    "unofficial": "非官方",
     "title": "本应存在的 Hugging Face 桌面客户端。",
     "subtitle": "非官方开源应用：极速浏览、下载与管理 Hub，一切本地，尊重隐私。",
-    "ctaPrimary": "在 GitHub 上关注",
+    "ctaPrimary": "下载",
     "ctaSecondary": "在 GitHub 上 Star",
-    "badge": "Apache-2.0 · macOS / Windows / Linux · 无遥测 · English / 中文"
+    "badge": "Apache-2.0 · macOS / Windows / Linux · 无遥测 · English / 中文",
+    "badgeReleased": "v{version} · Apache-2.0 · macOS / Windows / Linux · 无遥测",
+    "shotAlt": "Oh My HuggingFace 浏览界面：三栏浅色窗口中的模型列表与实时 model card"
   },
   "pain": {
     "line": "二十个标签页、无尽的刷新，和一个你不敢打开的 300 GB 缓存文件夹。",
@@ -35,41 +48,41 @@
     "region": "功能",
     "browse": {
       "eyebrow": "浏览",
-      "number": "01",
       "title": "三栏极速浏览，零刷新切换。",
-      "description": "侧边栏、列表与实时预览固定布局，在 Models、Datasets、Spaces、Papers 之间切换无需新标签、无需整页重载。长列表虚拟滚动保持流畅；右栏即时渲染 model card、文件树与元数据。"
+      "description": "侧边栏、列表与实时预览固定布局，在 Models、Datasets、Spaces、Papers 之间切换无需新标签、无需整页重载。长列表虚拟滚动保持流畅；右栏即时渲染 model card、文件树与元数据。",
+      "shotAlt": "三栏浏览界面：模型列表与 README 卡片"
     },
     "command": {
-      "eyebrow": "命令",
-      "number": "02",
+      "eyebrow": "搜索与筛选",
       "title": "Cmd+K。键盘优先的 Hub 搜索。",
-      "description": "一个面板搞定搜索、筛选与排序。按 task、library、license 或参数量收窄结果；按 trending、likes 或 downloads 排序。不用翻菜单，保持心流。"
+      "description": "一个面板搞定搜索、筛选与排序。按 task、library、license 或参数量收窄结果；按 trending、likes 或 downloads 排序。不用翻菜单，保持心流。",
+      "shotAlt": "任务、库与许可证筛选面板"
     },
     "downloads": {
-      "eyebrow": "下载",
-      "number": "03",
+      "eyebrow": "文件",
       "title": "浏览器给不了的下载管理器。",
-      "description": "队列、并行、暂停/续传、限速、完成后 sha256 校验，以及系统级完成通知。写入 Hugging Face 标准缓存布局，与 transformers / CLI 完全互通。"
+      "description": "队列、并行、暂停/续传、限速、完成后 sha256 校验，以及系统级完成通知。写入 Hugging Face 标准缓存布局，与 transformers / CLI 完全互通。",
+      "shotAlt": "模型仓库的文件树与预览面板"
     },
     "cache": {
-      "eyebrow": "缓存",
-      "number": "04",
-      "title": "看清本地缓存，一键回收空间。",
-      "description": "扫描 Hugging Face 缓存目录，按仓库展示磁盘占用，一键清理旧 revision。网页做不到这件事 —— ohmyhf 能帮你从 ~/.cache/huggingface 里救出几百 GB。"
+      "eyebrow": "主页",
+      "title": "关注 Hub，不必堆满浏览器标签。",
+      "description": "关注对象的主页动态、侧边 Trending，以及收藏、下载与缓存组成的 Library —— 全部收进一个桌面窗口，把浏览器留给别的事。",
+      "shotAlt": "主页动态与 Trending 侧栏"
     }
   },
   "comingSoon": {
     "region": "即将推出",
     "eyebrow": "路线图",
     "title": "即将到来。",
-    "badge": "即将推出",
+    "badge": "进行中",
     "inbox": {
-      "title": "关注收件箱",
-      "description": "订阅用户、组织与仓库的更新及 Daily Papers，有新动态时通过系统通知提醒你。"
+      "title": "更强的收件箱",
+      "description": "更精细的关注通知：用户、组织、仓库与 Daily Papers，让信号保持有用。"
     },
     "compare": {
-      "title": "模型对比",
-      "description": "将 2–4 个模型并排对比参数量、license 与 benchmark，一眼看清差异，放心选型。"
+      "title": "更丰富的对比",
+      "description": "并排对比更多元数据与 benchmark，选型仍是一眼的事。"
     },
     "toolchain": {
       "title": "本地 AI 工具链",
@@ -90,25 +103,27 @@
     },
     "crossPlatform": {
       "title": "跨平台",
-      "description": "提供 macOS、Windows 与 Linux 原生构建，并支持自动更新，无需四处寻找安装包。"
+      "description": "提供 macOS、Windows 与 Linux 原生构建，并通过应用内更新保持最新，无需四处寻找安装包。"
     }
   },
   "download": {
     "region": "下载",
     "eyebrow": "获取应用",
     "title": "下载 ohmyhf",
+    "versionLine": "最新版本：v{version}。安装包来自 GitHub Releases。",
     "notice": "首个正式版即将发布 —— 关注仓库即可收到通知。",
     "watchCta": "在 GitHub 上关注",
+    "get": "下载",
     "comingSoon": "即将推出",
     "macos": "macOS",
-    "macosFormat": "dmg",
+    "macosFormat": "dmg（Apple Silicon）",
     "windows": "Windows",
     "windowsFormat": "nsis",
     "linux": "Linux",
     "linuxAppImage": "AppImage",
     "linuxDeb": "deb",
-    "unsignedNote": "打开未签名的 macOS 应用",
-    "unsignedPrefix": "目前 macOS 构建尚未签名 —— 打开方法见"
+    "unsignedNote": "签名说明",
+    "unsignedPrefix": "目前 macOS 构建尚未签名 —— 详见"
   },
   "faq": {
     "region": "常见问题",
@@ -129,7 +144,7 @@
       },
       "platforms": {
         "q": "支持哪些平台？",
-        "a": "ohmyhf 面向 macOS、Windows 与 Linux。发布形态包括 dmg、NSIS 安装包以及 AppImage / deb；正式版发布后将支持自动更新。"
+        "a": "ohmyhf 面向 macOS、Windows 与 Linux。发布形态包括 dmg、NSIS 安装包以及 AppImage / deb；并通过 GitHub Releases 提供应用内更新。"
       },
       "cache": {
         "q": "与 huggingface-cli / transformers 的缓存兼容吗？",

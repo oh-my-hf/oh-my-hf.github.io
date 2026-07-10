@@ -1,0 +1,6 @@
+{
+  "files": ["src/layouts/BaseLayout.astro", "src/pages/index.astro", "src/pages/zh/index.astro"],
+  "insertBefore": "</head>",
+  "commentSyntax": "html",
+  "cspChecked": true
+}

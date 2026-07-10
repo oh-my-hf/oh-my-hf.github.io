@@ -2,6 +2,9 @@
  * One-shot OG image generator. Not part of `pnpm build`.
  *
  * Usage: pnpm generate:og
+ *
+ * Light theme matching the app chrome: cool paper, black wordmark,
+ * yellow brand icon, unofficial line.
  */
 import { writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
@@ -9,27 +12,27 @@ import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const outPath = join(__dirname, '..', 'public', 'og.png');
+const root = join(__dirname, '..');
+const outPath = join(root, 'public', 'og.png');
+const iconPath = join(root, 'public', 'favicon.png');
+
+const iconPng = await sharp(iconPath).resize(160, 160).png().toBuffer();
+const iconB64 = iconPng.toString('base64');
 
 const svg = `<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
-  <rect width="1200" height="630" fill="#0A0D13"/>
-  <!-- hairline frame -->
-  <rect x="48" y="48" width="1104" height="534" fill="none" stroke="#242C3A" stroke-width="1"/>
-  <!-- accent bar -->
-  <rect x="48" y="48" width="4" height="534" fill="#8A97FF"/>
-  <!-- three-pane mark -->
-  <g transform="translate(96, 120)">
-    <rect x="0" y="0" width="18" height="48" rx="3" fill="#8A97FF"/>
-    <rect x="24" y="0" width="18" height="48" rx="3" fill="#E8EDF4"/>
-    <rect x="48" y="0" width="18" height="48" rx="3" fill="#4AD6A6"/>
-  </g>
-  <!-- wordmark -->
-  <text x="96" y="260" font-family="Georgia, 'Times New Roman', serif" font-size="96" font-weight="600" fill="#E8EDF4" letter-spacing="-2">ohmyhf</text>
-  <!-- slogan -->
-  <text x="96" y="340" font-family="Georgia, 'Times New Roman', serif" font-size="32" fill="#9AA7BA">The Hugging Face desktop client that should have existed.</text>
-  <!-- unofficial line -->
-  <text x="96" y="520" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18" fill="#8A97FF" letter-spacing="2">unofficial · open source</text>
+  <defs>
+    <linearGradient id="wash" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f3f4f6"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#wash)"/>
+  <rect x="48" y="48" width="1104" height="534" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+  <image href="data:image/png;base64,${iconB64}" x="96" y="120" width="96" height="96"/>
+  <text x="96" y="300" font-family="'Source Sans 3', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="88" font-weight="700" fill="#101828" letter-spacing="-1.5">ohmyhf</text>
+  <text x="96" y="368" font-family="'Source Sans 3', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="28" font-weight="400" fill="#4b5563">The Hugging Face desktop client that should have existed.</text>
+  <text x="96" y="520" font-family="'IBM Plex Mono', ui-monospace, Menlo, monospace" font-size="18" font-weight="500" fill="#6a7282" letter-spacing="1">unofficial · open source · v0.0.2</text>
 </svg>`;
 
 const png = await sharp(Buffer.from(svg)).png().toBuffer();
