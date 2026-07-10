@@ -13,6 +13,7 @@ interface Props {
 
 const { locale } = Astro.props;
 const t = useTranslations(locale);
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const alt = alternateLocale(locale);
 const altHref = localeHref(alt);
 const switchLabel = alt === 'zh-CN' ? t('nav.switchToZh') : t('nav.switchToEn');
@@ -32,8 +33,15 @@ const navItems = [
   >
     <a
       href={localeHref(locale)}
-      class="font-display text-lg font-semibold tracking-tight text-paper transition-colors hover:text-iris"
+      class="flex items-center gap-2 font-display text-lg font-semibold tracking-tight text-paper transition-colors hover:text-iris"
     >
+      <img
+        src={`${base}/favicon.png`}
+        alt=""
+        width="28"
+        height="28"
+        class="h-7 w-7"
+      />
       ohmyhf
     </a>
 
