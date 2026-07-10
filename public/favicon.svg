@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
-  <!-- Original three-pane mark for ohmyhf — not derived from Hugging Face assets -->
-  <rect width="32" height="32" rx="6" fill="#0A0D13"/>
-  <rect x="5" y="7" width="6" height="18" rx="1.5" fill="#8A97FF"/>
-  <rect x="13" y="7" width="6" height="18" rx="1.5" fill="#E8EDF4"/>
-  <rect x="21" y="7" width="6" height="18" rx="1.5" fill="#4AD6A6"/>
-</svg>

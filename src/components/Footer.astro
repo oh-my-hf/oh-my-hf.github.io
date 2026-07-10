@@ -13,6 +13,7 @@ interface Props {
 
 const { locale } = Astro.props;
 const t = useTranslations(locale);
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const alt = alternateLocale(locale);
 const altHref = localeHref(alt);
 const switchLabel = alt === 'zh-CN' ? t('nav.switchToZh') : t('nav.switchToEn');
@@ -26,6 +27,20 @@ const links = [
 
 <footer class="border-t border-line px-4 py-12 sm:px-6 sm:py-16">
   <div class="mx-auto max-w-6xl">
+    <div class="mb-6 flex items-center gap-3">
+      <img
+        src={`${base}/favicon.png`}
+        alt=""
+        width="36"
+        height="36"
+        loading="lazy"
+        class="h-9 w-9"
+      />
+      <span class="font-display text-lg font-semibold tracking-tight text-paper">
+        ohmyhf
+      </span>
+    </div>
+
     <p class="max-w-3xl text-sm leading-relaxed text-fog">
       {t('footer.disclaimer')}
     </p>
