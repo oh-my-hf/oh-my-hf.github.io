@@ -6,7 +6,7 @@
  * Light theme matching the app chrome: cool paper, black wordmark,
  * yellow brand icon, unofficial line.
  */
-import { writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
@@ -15,6 +15,10 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, '..');
 const outPath = join(root, 'public', 'og.png');
 const iconPath = join(root, 'public', 'favicon.png');
+
+// Keep the version in sync with the latest release (fetch-release.mjs output).
+const releaseSrc = readFileSync(join(root, 'src', 'generated', 'release.ts'), 'utf8');
+const version = releaseSrc.match(/export const version = '([^']+)'/)?.[1] ?? '0.0.0';
 
 const iconPng = await sharp(iconPath).resize(160, 160).png().toBuffer();
 const iconB64 = iconPng.toString('base64');
@@ -32,7 +36,7 @@ const svg = `<?xml version="1.0" encoding="UTF-8"?>
   <image href="data:image/png;base64,${iconB64}" x="96" y="120" width="96" height="96"/>
   <text x="96" y="300" font-family="'Source Sans 3', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="88" font-weight="700" fill="#101828" letter-spacing="-1.5">ohmyhf</text>
   <text x="96" y="368" font-family="'Source Sans 3', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="28" font-weight="400" fill="#4b5563">The Hugging Face desktop client that should have existed.</text>
-  <text x="96" y="520" font-family="'IBM Plex Mono', ui-monospace, Menlo, monospace" font-size="18" font-weight="500" fill="#6a7282" letter-spacing="1">unofficial · open source · v0.0.4</text>
+  <text x="96" y="520" font-family="'IBM Plex Mono', ui-monospace, Menlo, monospace" font-size="18" font-weight="500" fill="#6a7282" letter-spacing="1">unofficial · open source · v${version}</text>
 </svg>`;
 
 const png = await sharp(Buffer.from(svg)).png().toBuffer();
