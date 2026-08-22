@@ -1,5 +1,5 @@
 /**
- * Fetch the latest GitHub Release for oh-my-hf/ohmyhf and write download URLs.
+ * Fetch the latest GitHub Release for fzlzjerry/ohmyhf and write download URLs.
  *
  * Usage: node scripts/fetch-release.mjs
  * Runs automatically before `astro build` via the `prebuild` script.
@@ -8,7 +8,7 @@ import { writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const REPO = 'oh-my-hf/ohmyhf';
+const REPO = 'fzlzjerry/ohmyhf';
 const API = `https://api.github.com/repos/${REPO}/releases/latest`;
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
