@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "ohmyhf — Unofficial Hugging Face desktop client",
-    "description": "ohmyhf is an unofficial Hugging Face desktop client for browsing, downloading, and managing the Hub — fast, local, and private. Open source, Apache-2.0, for macOS, Windows, and Linux."
+    "title": "ohmyhf — unofficial Hugging Face desktop client for Mac, Windows, Linux",
+    "description": "ohmyhf (Oh My Hugging Face) is an unofficial desktop client for the Hugging Face Hub. Browse models, datasets, and Spaces, download to the standard cache, on Mac, Windows, and Linux. Open source, Apache-2.0."
   },
   "notFound": {
     "metaTitle": "404 — Page not found · ohmyhf",
