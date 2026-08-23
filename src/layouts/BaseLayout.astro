@@ -33,9 +33,12 @@ const ogImage = new URL('/og.png', site).href;
 const keywords =
   locale === 'zh-CN'
     ? [
+        'ohmyhf',
+        'Oh My Hugging Face',
         'Hugging Face',
         'Hugging Face Hub',
         'Hugging Face 桌面客户端',
+        'Hugging Face 桌面应用',
         'Hugging Face 离线浏览',
         '模型浏览器',
         '数据集浏览器',
@@ -46,9 +49,13 @@ const keywords =
         'Linux',
       ]
     : [
+        'ohmyhf',
+        'Oh My Hugging Face',
+        'Oh My HuggingFace',
         'Hugging Face',
         'Hugging Face Hub',
         'Hugging Face desktop client',
+        'Hugging Face desktop app',
         'Hugging Face app',
         'model browser',
         'dataset browser',
@@ -64,6 +71,8 @@ const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'SoftwareApplication',
   name: 'ohmyhf',
+  alternateName: ['Oh My Hugging Face', 'Oh My HuggingFace'],
+  description,
   applicationCategory: 'DeveloperApplication',
   operatingSystem: 'macOS, Windows, Linux',
   license: 'https://www.apache.org/licenses/LICENSE-2.0',
@@ -127,7 +136,7 @@ const jsonLd = {
     <meta property="og:image:height" content="630" />
     <meta
       property="og:image:alt"
-      content="ohmyhf — the Hugging Face desktop client that should have existed. Unofficial, open source."
+      content={title}
     />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
