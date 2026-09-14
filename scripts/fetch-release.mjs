@@ -3,6 +3,7 @@
  *
  * Usage: node scripts/fetch-release.mjs
  * Runs automatically before `astro build` via the `prebuild` script.
+ * Set GITHUB_TOKEN to authenticate (CI rate limits); omitted locally if unset.
  */
 import { writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
@@ -26,12 +27,17 @@ function pick(assets, patterns) {
   return null;
 }
 
-const res = await fetch(API, {
-  headers: {
-    Accept: 'application/vnd.github+json',
-    'User-Agent': 'ohmyhf-website-release-fetch',
-  },
-});
+/** @type {Record<string, string>} */
+const headers = {
+  Accept: 'application/vnd.github+json',
+  'User-Agent': 'ohmyhf-website-release-fetch',
+};
+
+if (process.env.GITHUB_TOKEN) {
+  headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
+}
+
+const res = await fetch(API, { headers });
 
 if (!res.ok) {
   throw new Error(`GitHub API ${res.status}: ${await res.text()}`);

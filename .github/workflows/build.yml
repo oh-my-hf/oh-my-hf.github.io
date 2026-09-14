@@ -3,6 +3,9 @@ name: Build
 on:
   push:
   pull_request:
+  # Dispatched by pin-release.yml after a GITHUB_TOKEN pin commit
+  # (token pushes do not start other workflows).
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -36,6 +39,8 @@ jobs:
         run: pnpm lint
 
       - name: Build
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
         run: pnpm build
 
       - name: Upload Pages artifact
@@ -44,7 +49,7 @@ jobs:
           path: dist
 
   deploy:
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
     needs: build
     runs-on: ubuntu-latest
     environment:
