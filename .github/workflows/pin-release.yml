@@ -1,0 +1,76 @@
+name: Pin latest release
+
+# Commits src/generated/release.ts when fzlzjerry/ohmyhf Latest differs from the
+# committed pin. A GITHUB_TOKEN push does not start other workflows, so after a
+# pin commit this job dispatches the existing Build workflow (workflow_dispatch
+# is an explicit exception) to rebuild and redeploy GitHub Pages.
+#
+# The app repo can ping this site immediately after a GitHub Release by sending
+# a repository_dispatch of type `ohmyhf-release`, for example:
+#   gh api repos/oh-my-hf/oh-my-hf.github.io/dispatches \
+#     -f event_type=ohmyhf-release
+
+on:
+  schedule:
+    - cron: '17 * * * *'
+  workflow_dispatch:
+  repository_dispatch:
+    types: [ohmyhf-release]
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: pin-release
+  cancel-in-progress: false
+
+jobs:
+  pin:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          token: ${{ github.token }}
+          persist-credentials: true
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Fetch latest release
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node scripts/fetch-release.mjs
+
+      - name: Commit pin if changed
+        id: commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          if git diff --quiet -- src/generated/release.ts; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "Pin already current; nothing to commit."
+            exit 0
+          fi
+
+          git add src/generated/release.ts
+          version="$(grep -o "version = '[^']*'" src/generated/release.ts | head -1 | cut -d"'" -f2)"
+          if [ -z "$version" ]; then
+            echo "::error::Could not parse version from src/generated/release.ts"
+            exit 1
+          fi
+
+          git commit -m "chore: pin downloads to v${version}"
+          git push origin HEAD:main
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Trigger Pages build
+        if: steps.commit.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run build.yml --ref main
